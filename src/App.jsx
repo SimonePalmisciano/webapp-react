@@ -1,5 +1,6 @@
 import Main from "./components/Main/Main";
 import { useEffect, useState } from "react";
+import { ProductProvider } from "./contexts/ProductContext";
 
 
 function App() {
@@ -10,7 +11,7 @@ function App() {
   useEffect(() => {
     async function loadProducts() {
       try{
-        const response = await fetch("http://localhost:3000/products");
+        const response = await fetch("http://localhost:2222/products");
         const data = await response.json();
 
         if(!response.ok || data.error) {
@@ -32,8 +33,9 @@ function App() {
 
 
   return (
-    
-    <Main products={products} loading={loading} error={error}/>
+    <ProductProvider>
+      <Main products={products} loading={loading} error={error}/>
+    </ProductProvider>
   )
 }
 export default App;
