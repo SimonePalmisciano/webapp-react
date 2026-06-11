@@ -1,6 +1,6 @@
 
 import ProductsSection from "../ProductsSection";
-import useProduct from "../../hooks/useProduct";
+import useProduct from "../../hooks/useProduct.js";
 
 function Main() {
     const {products, loading, error} = useProduct();

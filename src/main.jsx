@@ -6,6 +6,9 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 // Bootstrap JS
 import 'bootstrap/dist/js/bootstrap.bundle.min.js'
 
+//Bootstrap icons CSS
+import 'bootstrap-icons/font/bootstrap-icons.css'
+
 import './styles/index.css'
 
 

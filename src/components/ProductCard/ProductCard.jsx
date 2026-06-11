@@ -2,7 +2,6 @@ import { Link } from "react-router";
 
 function ProductCard({ product }) {
     const { name, description, price, categories, geological_era, image, slug } = product;
-    console.log(product);
     return (
         <Link to={`/product/${slug}`}>
             <div className="card h-100 shadow-sm">
