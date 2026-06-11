@@ -1,9 +1,9 @@
-import { useParams } from "react-router-dom";
+import { useParams } from "react-router";
 import { useEffect, useState } from "react";
-import ProductCard from "../components/ProductCard";
+import ProductCard from "../components/ProductCard/ProductCard";
 import ReviewCard from "../components/ReviewCard";
 
-export default function ProductDetailPage() {
+function ProductDetailPage() {
     const { slug } = useParams();
     const [product, setProduct] = useState(null);
     const [reviews, setReviews] = useState([]);
@@ -35,3 +35,5 @@ export default function ProductDetailPage() {
 
     );
 }
+
+export default ProductDetailPage;

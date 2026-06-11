@@ -2,7 +2,7 @@
 import { ProductProvider } from "./contexts/ProductContext.jsx";
 import { BrowserRouter, Route, Routes } from "react-router";
 import HomePage from "./pages/HomePage";
-import { ProductDetailPage } from "./pages/ProductDetailPage.jsx"
+import ProductDetailPage from "./pages/ProductDetailPage.jsx"
 import NotFound from "./pages/NotFound.jsx";
 import LayoutPagina from "./layouts/LayoutPagina.jsx";
 import AboutUs from "./pages/AboutUs.jsx";
