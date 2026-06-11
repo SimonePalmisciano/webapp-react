@@ -8,7 +8,7 @@ function ProductProvider({ children }) {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState("");
     useEffect(() => {
-        fetch("http://localhost:2222/products")
+        fetch("http://localhost:3000/products")
             .then(response => {
                 if (!response.ok) {
                     throw new Error("Errore nel recupero dei prodotti");
