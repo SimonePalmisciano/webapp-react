@@ -20,7 +20,7 @@ function App() {
           <Route Component={LayoutPagina}>
             <Route index Component={HomePage} />
             <Route path="products" Component={ProductPage} />
-            <Route path="product/:productSlug" Component={ProductDetailPage} />
+            <Route path="products/:productSlug" Component={ProductDetailPage} />
             <Route path="about-us" Component={AboutUs} />
           </Route>
 

@@ -1,14 +1,17 @@
-
+a{
+    text-decoration: none;
+}
 .alt-image-text{
     height:180px;
 }
 :root{
     --jurassikGreen: #0B2418;
     --jurassikMoss: #1E4620;
-    --jurassikOrange: #FF5E13;
+    --jurassikOrange: #ba3b00;
     --jurassikYellow: #FFB800;
     --jurassikSand: #F5F2EB;
     --jurassikDark: #121212;
+    --jurassikDarkSand: #ffe5a9;
 
                     
 }
@@ -20,4 +23,42 @@ body{
 }
 .logo{
     max-width:100px;
+}
+
+.text-jurassik-light{
+    color:var(--jurassikSand);
+}
+.text-jurassik-dark{
+    color:var(--jurassikDark);
+}
+.bg-jurassik-green{
+    background-image:linear-gradient(var(--jurassikGreen), var(--jurassikMoss));
+}
+.bg-jurassik-orange{
+    background-color: var(--jurassikOrange);
+}
+.bg-jurassik-sand{
+    background-color: var(--jurassikSand);
+}
+.bg-jurassik-sand-dark{
+    background-color: var(--jurassikDarkSand);
+}
+.bg-jurassik-dark{
+    background-color: var(--jurassikDark);
+}
+.hero{
+    object-fit:cover;
+}
+
+.border-jurassik-dark{
+    border-color:var(--jurassikDark) !important;
+}
+
+.product-image{
+    min-height:500px;
+    object-fit:cover;
+}
+
+.w-80{
+    width:80%;
 }

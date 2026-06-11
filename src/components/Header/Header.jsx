@@ -3,11 +3,11 @@ import NavBar from "../Navbar/NavBar"
 
 function Header() {
     return (
-        <header className="bg-light border-bottom mb-4">
+        <header className="mb-4 bg-jurassik-orange border-bottom border-jurassik-dark ">
             <NavBar/>
-            <div className="container py-4">
+            <div className="container py-4 text-jurassik-light ">
                 <h1 className="mb-1">Jurassic Pork</h1>
-                <p className="text-muted mb-0">
+                <p className=" mb-0">
                     Panini, bites e sapori preistorici
                 </p>
             </div>
