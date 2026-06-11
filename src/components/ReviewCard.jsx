@@ -5,7 +5,7 @@ function ReviewCard({ review }) {
     const {likesNumber, updateLikes} = useLikesUpdate(review.slug);
 
     return (
-        <div className="card">
+        <div className="card p-0" data-bs-theme="dark">
             <div className="card-header d-flex justify-content-between">
                 <div className="card-title">
                     {review.title}

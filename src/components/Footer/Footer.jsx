@@ -2,8 +2,8 @@ import { Link } from "react-router";
 
 function Footer() {
     return (
-        <footer id="footer" className="bg-light border-top mt-4 jurassic-footer py-5">
-            <div className="container">
+        <footer id="footer" className="bg-jurassik-orange border-top border-jurassik-dark mt-4 jurassic-footer py-5">
+            <div className="container text-jurassik-light">
                 <div className="row gy-4">
                     <div className="col-12 col-md-4">
                         <h4 className="footer-title">Jurassic Pork 🦖</h4>
@@ -36,7 +36,7 @@ function Footer() {
                     </div>
                 </div>
 
-                <hr className="footer-divider my-4" />
+                <hr className="footer-divider my-4 text-jurassik-dark" />
 
                 <div className="text-center">
                     <p className="footer-copy mb-0">

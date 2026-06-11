@@ -6,8 +6,6 @@ const ProductContext = createContext(null);
 
 function ProductProvider({ children }) {
     const [products, setProducts] = useState([]);
-    const [categories, setCategories] = useState([]);
-    const [selectedCategory, setSelectedCategory] = useState("");
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState("");
 
@@ -33,24 +31,8 @@ function ProductProvider({ children }) {
                 setLoading(false);
             });
     }, []);
-
-    useEffect(() => {
-        fetch(`${BASE_API_URL}/categories`)
-            .then(res => res.json())
-            .then(data => setCategories(data.result || []))
-            .catch(() => setCategories([]));
-    }, []);
-
-    const filteredProducts = selectedCategory
-        ? products.filter(p => p.category === selectedCategory)
-        : products;
-
     const value = {
         products,
-        categories,
-        selectedCategory,
-        setSelectedCategory,
-        filteredProducts,
         loading,
         error
     };

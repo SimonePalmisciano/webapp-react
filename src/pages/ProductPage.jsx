@@ -20,10 +20,10 @@ function ProductPage() {
     if (error) return <div className="container py-4 alert alert-danger">{error}</div>;
 
     return (
-        <div className="container py-4">
+        <div className="container py-4 text-jurassik-light">
             <h1 className="h4 mb-3">Prodotti</h1>
 
-            <div className="mb-4">
+            <div className="mb-4 py-4 sticky-top bg-jurassik-orange rounded px-2">
                 <p className="mb-2 fw-semibold">Filtra per categoria</p>
                 <div className="d-flex flex-wrap gap-3">
                     <label className="form-check-label">
