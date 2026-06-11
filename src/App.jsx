@@ -1,3 +1,4 @@
+import Header from "./components/Header/Header";
 import Main from "./components/Main/Main";
 import { useEffect, useState } from "react";
 
@@ -32,8 +33,10 @@ function App() {
 
 
   return (
-    
-    <Main products={products} loading={loading} error={error}/>
+    <>
+     <Main products={products} loading={loading} error={error}/>
+    </>
+   
   )
 }
 export default App;
