@@ -10,7 +10,7 @@ function App() {
   useEffect(() => {
     async function loadProducts() {
       try{
-        const response = await fetch("http://localhost:3000/products");
+        const response = await fetch("http://localhost:2222/products");
         const data = await response.json();
 
         if(!response.ok || data.error) {
