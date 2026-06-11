@@ -5,19 +5,19 @@ import ReviewCard from "../components/ReviewCard";
 import { BASE_API_URL } from "../utils/api.js";
 
 function ProductDetailPage() {
-    const { slug } = useParams();
+    const { productSlug } = useParams();
     const [product, setProduct] = useState(null);
     const [reviews, setReviews] = useState([]);
 
     useEffect(() => {
-        fetch(`${BASE_API_URL}/products/${slug}`)
+        fetch(`${BASE_API_URL}/products/${productSlug}`)
             .then(res => res.json())
             .then(data => setProduct(data));
 
-        fetch(`${BASE_API_URL}/products/${slug}/reviews`)
+        fetch(`${BASE_API_URL}/products/${productSlug}/reviews`)
             .then(res => res.json())
             .then(data => setReviews(data));
-    }, [slug]);
+    }, [productSlug]);
 
     if (!product) return <p>Loading ...</p>;
 
