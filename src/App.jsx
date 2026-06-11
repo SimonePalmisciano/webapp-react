@@ -6,12 +6,14 @@ import NotFound from "./pages/NotFound.jsx";
 import LayoutPagina from "./layouts/LayoutPagina.jsx";
 import AboutUs from "./pages/AboutUs.jsx";
 import ProductPage from "./pages/ProductPage.jsx";
+import { CategoryProvider } from "./contexts/CategoryContext.jsx";
 
 function App() {
 
   return (
 
     <ProductProvider>
+      <CategoryProvider>
       <BrowserRouter>
         <Routes>
 
@@ -25,6 +27,7 @@ function App() {
           <Route path="*" Component={NotFound} />
         </Routes>
       </BrowserRouter>
+      </CategoryProvider>
     </ProductProvider>
 
   )
