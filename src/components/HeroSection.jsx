@@ -2,13 +2,11 @@ import {Link} from "react-router";
 
 function HeroSection() {
     return (
-        <section className="bg-light py-5 min-vh-100 d-flex align-items-center">
+        
+        <section className="bg-light py-5 min-vh-100 d-flex">
             <div className="container">
                 <div className="row align-items-center g-5">
-                    <div className="col-12">
-                        <span className="badge text-bg-danger mb-3">
-                            Benvenuto nell’era del gusto
-                        </span>
+                    <div className="col-12 text-center">
                         <h1 className="display-3 fw-bold mb-3">
                             Jurassic Pork
                         </h1>
@@ -20,13 +18,10 @@ function HeroSection() {
                             Scava nel nostro menù e lasciati sorprendere da burger fossili,
                             sapori selvaggi e reperti culinari indimenticabili.
                         </p>
-                        <div className="d-flex flex-wrap gap-3">
-                            <a to="/products" className="btn btn-dark btn-lg">
+                        <div className="d-flex flex-wrap gap-3 justify-content-center">
+                            <Link to="/products" className="btn btn-dark btn-lg">
                                 Scopri il menù
-                            </a>
-                            <a href="#" className="btn btn-outline-dark btn-lg">
-                                Contatti
-                            </a>
+                            </Link>
                         </div>
                     </div>
                     <div className="col-12 text-center">

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import ProductList from "../components/ProductList/ProductList";
-import useProduct from "../hooks/useProduct";
-import useCategories from "../hooks/useCategories";
+import useProduct from "../hooks/useProduct.js";
+import useCategories from "../hooks/useCategories.js";
 
 function ProductPage() {
   const { products, loading, error } = useProduct();
