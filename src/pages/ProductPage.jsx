@@ -1,18 +1,12 @@
 import { useState } from "react";
 import ProductList from "../components/ProductList/ProductList";
 import useProduct from "../hooks/useProduct";
+import useCategories from "../hooks/useCategories";
 
 function ProductPage() {
   const { products, loading, error } = useProduct();
+  const { categories } = useCategories();
   const [selectedCategory, setSelectedCategory] = useState("");
-
-  const labels = products.flatMap((product) =>
-    Array.isArray(product.categories)
-      ? product.categories.map((category) => category?.label).filter(Boolean)
-      : []
-  );
-
-  const categories = [...new Set(labels)];
 
   const filteredProducts = selectedCategory
     ? products.filter(
@@ -45,16 +39,16 @@ function ProductPage() {
           </label>
 
           {categories.map((category) => (
-            <label key={category} className="form-check-label">
+            <label key={category.slug} className="form-check-label">
               <input
                 className="form-check-input me-2"
                 type="radio"
                 name="category"
-                value={category}
-                checked={selectedCategory === category}
+                value={category.label}
+                checked={selectedCategory === category.label}
                 onChange={(e) => setSelectedCategory(e.target.value)}
               />
-              {category.toLowerCase() === "burgers" ? "Panini" : category}
+              {category.label.toLowerCase() === "burgers" ? "Panini" : category.label}
             </label>
           ))}
         </div>
