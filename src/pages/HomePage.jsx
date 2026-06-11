@@ -5,9 +5,6 @@ function HomePage() {
     return (
         <div className="container">
             <HeroSection />
-            <Link to="/products" className="btn btn-dark btn-sm">
-                Vai alla ProductPage
-            </Link>
         </div>
     )
 }
