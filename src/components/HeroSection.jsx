@@ -7,6 +7,13 @@ function HeroSection() {
             <div className="container">
                 <div className="row align-items-center g-5">
                     <div className="col-12 text-center">
+                        <img
+                            src="/Hero.png" // inserire un immagine 
+                            alt="Jurassic Pork hero"
+                            className="img-fluid rounded"
+                        />
+                    </div>
+                    <div className="col-12 text-center">
                         <h1 className="display-3 fw-bold mb-3">
                             Jurassic Pork
                         </h1>
@@ -23,13 +30,6 @@ function HeroSection() {
                                 Scopri il menù
                             </Link>
                         </div>
-                    </div>
-                    <div className="col-12 text-center">
-                        <img
-                            src="Bronto_burger.png" // inserire un immagine 
-                            alt="Jurassic Pork hero"
-                            className="img-fluid rounded"
-                        />
                     </div>
                 </div>
             </div>

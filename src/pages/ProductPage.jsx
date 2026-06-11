@@ -4,17 +4,17 @@ import useProduct from "../hooks/useProduct.js";
 import useCategories from "../hooks/useCategories.js";
 
 function ProductPage() {
-  const { products, loading, error } = useProduct();
-  const { categories } = useCategories();
-  const [selectedCategory, setSelectedCategory] = useState("");
+    const { products, loading, error } = useProduct();
+    const { categories } = useCategories();
+    const [selectedCategory, setSelectedCategory] = useState("");
 
-  const filteredProducts = selectedCategory
-    ? products.filter(
-        (product) =>
-          Array.isArray(product.categories) &&
-          product.categories.some((cat) => cat?.label === selectedCategory)
-      )
-    : products;
+    const filteredProducts = selectedCategory
+        ? products.filter(
+            (product) =>
+                Array.isArray(product.categories) &&
+                product.categories.some((cat) => cat?.label === selectedCategory)
+        )
+        : products;
 
     if (loading) return <div className="container py-4">Caricamento prodotti...</div>;
     if (error) return <div className="container py-4 alert alert-danger">{error}</div>;
@@ -38,21 +38,21 @@ function ProductPage() {
                         Tutte
                     </label>
 
-          {categories.map((category) => (
-            <label key={category.slug} className="form-check-label">
-              <input
-                className="form-check-input me-2"
-                type="radio"
-                name="category"
-                value={category.label}
-                checked={selectedCategory === category.label}
-                onChange={(e) => setSelectedCategory(e.target.value)}
-              />
-              {category.label.toLowerCase() === "burgers" ? "Panini" : category.label}
-            </label>
-          ))}
-        </div>
-      </div>
+                    {categories.map((category) => (
+                        <label key={category.slug} className="form-check-label">
+                            <input
+                                className="form-check-input me-2"
+                                type="radio"
+                                name="category"
+                                value={category.label}
+                                checked={selectedCategory === category.label}
+                                onChange={(e) => setSelectedCategory(e.target.value)}
+                            />
+                            {category.slug === "burgers" ? "Panini" : category.label}
+                        </label>
+                    ))}
+                </div>
+            </div>
 
 
             <ProductList products={filteredProducts} />
