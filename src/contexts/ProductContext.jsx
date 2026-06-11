@@ -13,12 +13,14 @@ function ProductProvider({ children }) {
                 if (!response.ok) {
                     throw new Error("Errore nel recupero dei prodotti");
                 }
+                console.log(response);
                 return response.json();
             })
             .then(data => {
                 if (data.error) {
                     throw new Error(data.error);
                 }
+                console.log(data.result);
                 setProducts(data.result || []);
             })
             .catch(error => {
