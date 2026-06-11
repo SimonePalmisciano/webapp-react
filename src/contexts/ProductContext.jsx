@@ -9,19 +9,18 @@ function ProductProvider({ children }) {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState("");
     useEffect(() => {
+
         fetch(`${BASE_API_URL}/products`)
             .then(response => {
                 if (!response.ok) {
                     throw new Error("Errore nel recupero dei prodotti");
                 }
-                console.log(response);
                 return response.json();
             })
             .then(data => {
                 if (data.error) {
                     throw new Error(data.error);
                 }
-                console.log(data.result);
                 setProducts(data.result || []);
             })
             .catch(error => {
