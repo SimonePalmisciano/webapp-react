@@ -5,6 +5,7 @@ import ProductDetailPage from "./pages/ProductDetailPage.jsx"
 import NotFound from "./pages/NotFound.jsx";
 import LayoutPagina from "./layouts/LayoutPagina.jsx";
 import AboutUs from "./pages/AboutUs.jsx";
+import ProductPage from "./pages/ProductPage.jsx";
 
 
 function App() {
@@ -17,7 +18,7 @@ function App() {
 
           <Route Component={LayoutPagina}>
             <Route index Component={HomePage} />
-            <Route path="products" Component={ProductsPage} />
+            <Route path="products" Component={ProductPage} />
             <Route path="product/:productSlug" Component={ProductDetailPage} />
             <Route path="about-us" Component={AboutUs} />
           </Route>
