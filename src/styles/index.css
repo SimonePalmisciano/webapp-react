@@ -2,3 +2,19 @@
 .alt-image-text{
     height:180px;
 }
+:root{
+    --jurassikGreen: #0B2418;
+    --jurassikMoss: #1E4620;
+    --jurassikOrange: #FF5E13;
+    --jurassikYellow: #FFB800;
+    --jurassikSand: #F5F2EB;
+    --jurassikDark: #121212;
+
+                    
+}
+.base-font{
+    font-family: "Montserrat", "sans-serif";
+}
+body{
+    font-family: "Montserrat", "sans-serif";
+}
