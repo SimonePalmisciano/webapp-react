@@ -34,13 +34,13 @@ function ProductDetailPage() {
                         <h2>{product.name}</h2>
                         <hr></hr>
                         <p>{product.description}</p>
-                        <p className="text-end">Prezzo: &euro; {product.price.toFixed(2)}</p>
+                        <p className="text-end">Prezzo: &euro; {product.price?.toFixed(2)}</p>
                     </div>
                     <h2>Recensioni</h2>
                     {reviews.length === 0 && <p>Nessuna recensione</p>}
 
                     {reviews.map(r => (
-                        <ReviewCard key={r.id} review={r} />
+                        <ReviewCard key={r.slug} review={r} />
                     ))}
                 </div>
             </div>
