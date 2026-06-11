@@ -1,4 +1,6 @@
-function ProductsSection(products) {
+import ProductCard from "./ProductCard/ProductCard.jsx";
+
+function ProductsSection({products}) {
     return (
         <section className="py-5">
             <div className="container">

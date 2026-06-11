@@ -1,4 +1,5 @@
-import ProductList from "../ProductList/ProductList"
+
+import ProductsSection from "../ProductsSection";
 
 function Main({ products, loading, error}) {
     if (loading) {
@@ -9,6 +10,6 @@ function Main({ products, loading, error}) {
         return <div className="container py-4 alert alert-danger">{error}</div>;
     }
     
-        return <ProductList products={products}/>;
+        return <ProductsSection products={products}/>;
 }
 export default Main
