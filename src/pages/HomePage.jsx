@@ -1,5 +1,5 @@
 import HeroSection from "../components/HeroSection.jsx"
-import { Link } from "react-router"
+
 
 function HomePage() {
     return (

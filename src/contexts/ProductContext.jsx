@@ -35,7 +35,7 @@ function ProductProvider({ children }) {
     }, []);
 
     useEffect(() => {
-        fetch(`${BASE_API_URL}/products/categories`)
+        fetch(`${BASE_API_URL}/categories`)
             .then(res => res.json())
             .then(data => setCategories(data.result || []))
             .catch(() => setCategories([]));
@@ -56,9 +56,9 @@ function ProductProvider({ children }) {
     };
 
     return (
-        <ProductContext.Provider value={value}>
+        <ProductContext value={value}>
             {children}
-        </ProductContext.Provider>
+        </ProductContext>
     );
 }
 

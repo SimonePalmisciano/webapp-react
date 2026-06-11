@@ -26,7 +26,7 @@ function HeroSection() {
                     </div>
                     <div className="col-12 text-center">
                         <img
-                            src="..." // inserire un immagine 
+                            src="Bronto_burger.png" // inserire un immagine 
                             alt="Jurassic Pork hero"
                             className="img-fluid rounded"
                         />
