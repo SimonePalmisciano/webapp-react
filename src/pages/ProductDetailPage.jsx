@@ -2,6 +2,7 @@ import { useParams } from "react-router";
 import { useEffect, useState } from "react";
 import ProductCard from "../components/ProductCard/ProductCard";
 import ReviewCard from "../components/ReviewCard";
+import { BASE_API_URL } from "../utils/api.js";
 
 function ProductDetailPage() {
     const { slug } = useParams();
@@ -9,11 +10,11 @@ function ProductDetailPage() {
     const [reviews, setReviews] = useState([]);
 
     useEffect(() => {
-        fetch(`http://localhost:3000/products/${slug}`)
+        fetch(`${BASE_API_URL}/products/${slug}`)
             .then(res => res.json())
             .then(data => setProduct(data));
 
-        fetch(`http://localhost:3000/products/${slug}/reviews`)
+        fetch(`${BASE_API_URL}/products/${slug}/reviews`)
             .then(res => res.json())
             .then(data => setReviews(data));
     }, [slug]);
