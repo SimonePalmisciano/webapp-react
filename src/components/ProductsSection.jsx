@@ -12,7 +12,7 @@ function ProductsSection(products) {
                 ) : (
                     <div className="row g-4">
                         {products.map((product) => (
-                            <div className="col-12 col-md-6 col-lg-4" key={product.id}>
+                            <div className="col-12 col-md-6 col-lg-4" key={product.slug}>
                                 <ProductCard product={product} />
                             </div>
                         ))}
