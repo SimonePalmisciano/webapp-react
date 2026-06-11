@@ -9,6 +9,7 @@ function ProductProvider({ children }) {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState("");
     useEffect(() => {
+
         fetch(`${BASE_API_URL}/products`)
             .then(response => {
                 if (!response.ok) {

@@ -1,4 +1,3 @@
-
 import { ProductProvider } from "./contexts/ProductContext.jsx";
 import { BrowserRouter, Route, Routes } from "react-router";
 import HomePage from "./pages/HomePage";
@@ -9,8 +8,9 @@ import AboutUs from "./pages/AboutUs.jsx";
 
 
 function App() {
-  
+
   return (
+
     <ProductProvider>
       <BrowserRouter>
         <Routes>
@@ -26,6 +26,7 @@ function App() {
         </Routes>
       </BrowserRouter>
     </ProductProvider>
+
   )
 }
 export default App;
