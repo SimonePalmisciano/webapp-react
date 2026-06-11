@@ -7,7 +7,6 @@ import LayoutPagina from "./layouts/LayoutPagina.jsx";
 import AboutUs from "./pages/AboutUs.jsx";
 import ProductPage from "./pages/ProductPage.jsx";
 
-
 function App() {
 
   return (
