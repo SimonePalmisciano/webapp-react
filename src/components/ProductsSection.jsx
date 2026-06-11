@@ -1,4 +1,17 @@
-function ProductsSection(products) {
+import useProduct from "../hooks/useProduct.jsx";
+import ProductCard from "./ProductCard/ProductCard.jsx";
+
+function ProductsSection() {
+    const {products, loading, error} = useProduct();
+
+    if (loading) {
+        return <div className="container py-4">Caricamento prodotti...</div>;
+    }
+
+    if (error) {
+        return <div className="container py-4 alert alert-danger">{error}</div>;
+    }
+
     return (
         <section className="py-5">
             <div className="container">

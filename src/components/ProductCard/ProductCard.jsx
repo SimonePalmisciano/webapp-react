@@ -6,7 +6,7 @@ function ProductCard({ product }) {
             {image ? (
                 <img src={image} className="card-img-top" alt={name} />
             ) : (
-                <div className="bg-light d-flex align-items-center justify-content-center" style={{ height: "180px" }}>
+                <div className="bg-light d-flex align-items-center justify-content-center alt-image-text" >
                     <span className="text-muted">Nesuna immagine</span>
                 </div>
             )}

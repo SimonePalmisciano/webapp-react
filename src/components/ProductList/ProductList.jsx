@@ -1,6 +1,8 @@
+
 import ProductCard from "../ProductCard/ProductCard";
 
-function ProductList({ products }){
+function ProductList({products}){
+    
     return(
         <div className="container py-4">
             <div className="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
