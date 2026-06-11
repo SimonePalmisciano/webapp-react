@@ -1,22 +1,23 @@
-import { useParams } from "react-router-dom";
+import { useParams } from "react-router";
 import { useEffect, useState } from "react";
-import ProductCard from "../components/ProductCard";
+import ProductCard from "../components/ProductCard/ProductCard";
 import ReviewCard from "../components/ReviewCard";
+import { BASE_API_URL } from "../utils/api.js";
 
-export default function ProductDetailPage() {
-    const { id } = useParams();
-    const [product, setProducts] = useState(null);
+function ProductDetailPage() {
+    const { slug } = useParams();
+    const [product, setProduct] = useState(null);
     const [reviews, setReviews] = useState([]);
 
     useEffect(() => {
-        fetch(`http://localhost:3000/products/${id}`)
+        fetch(`${BASE_API_URL}/products/${slug}`)
             .then(res => res.json())
             .then(data => setProduct(data));
 
-        fetch(`http://localhost:3000/products/${id}/reviews`)
+        fetch(`${BASE_API_URL}/products/${slug}/reviews`)
             .then(res => res.json())
             .then(data => setReviews(data));
-    }, [id]);
+    }, [slug]);
 
     if (!product) return <p>Loading ...</p>;
 
@@ -35,3 +36,5 @@ export default function ProductDetailPage() {
 
     );
 }
+
+export default ProductDetailPage;
