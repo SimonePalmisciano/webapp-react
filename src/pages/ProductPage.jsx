@@ -61,7 +61,7 @@ function ProductPage() {
 
     return (
         <div className="container py-4 text-jurassik-light">
-            <h1 className="h4 mb-3">Prodotti</h1>
+            <h1 className="h1-5 mb-3">Prodotti</h1>
 
             <div className="mb-4 py-4 sticky-top bg-jurassik-orange rounded px-2">
                 <p className="mb-2 fw-semibold">Filtra per categoria</p>
