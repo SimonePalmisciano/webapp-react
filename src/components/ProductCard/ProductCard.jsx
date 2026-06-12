@@ -5,7 +5,7 @@ function ProductCard({ product }) {
     const { name, description, price, categories, geological_era, image, slug } = product;
     return (
         <Link to={`/products/${slug}`}>
-            <div className="card h-100 shadow-sm" data-bs-theme="dark">
+            <div className="card h-100 product-card" data-bs-theme="dark">
                 <img src={image} className="card-img-top product-image" alt={name} />
                 <div className="card-body d-flex flex-column">
                     <h5 className="card-title">{name}</h5>

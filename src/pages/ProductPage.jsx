@@ -2,6 +2,7 @@ import { useState } from "react";
 import ProductList from "../components/ProductList/ProductList";
 import useProduct from "../hooks/useProduct.js";
 import useCategories from "../hooks/useCategories.js";
+import { useEffect } from "react";
 
 function ProductPage() {
     const { products, loading, error } = useProduct();
@@ -15,6 +16,10 @@ function ProductPage() {
                 product.categories.some((cat) => cat?.label === selectedCategory)
         )
         : products;
+    // Aggiunta useEffect per riportare lo scroll all'inizio della pagina quando viene caricato il componente    
+    useEffect(()=>{
+        window.scrollTo(0, 0);
+    }, []);
 
     if (loading) return <div className="container py-4">Caricamento prodotti...</div>;
     if (error) return <div className="container py-4 alert alert-danger">{error}</div>;

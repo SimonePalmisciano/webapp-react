@@ -26,7 +26,7 @@ function HeroSection() {
                             sapori selvaggi e reperti culinari indimenticabili.
                         </p>
                         <div className="d-flex flex-wrap gap-3 justify-content-center">
-                            <Link to="/products" className="btn btn-dark btn-lg text-jurassik-light">
+                            <Link prefetch="intent" to="/products" className="btn btn-dark btn-lg text-jurassik-light">
                                 Scopri il menù
                             </Link>
                         </div>
