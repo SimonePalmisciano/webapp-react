@@ -1,14 +1,8 @@
 import useProduct from "../hooks/useProduct.js";
 import ProductCard from "./ProductCard/ProductCard";
 function LatestProducts() {
-    const {products, loading, error} = useProduct();
-    let filteredProducts = []
-    if(!error && products){
-        filteredProducts = products.filter((product, index) => {
-            return index <= 5;
-        }
-        )
-    }
+    const {products, loading, error} = useProduct("?orderBy=updated_at&limit=5");
+
     return (
         <div className="container text-jurassik-light">
             <h2>I nostri nuovi abbattimenti!</h2>
@@ -22,7 +16,7 @@ function LatestProducts() {
             </h4>
             }
             <div className="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
-                {filteredProducts.map((product) => (
+                {products.map((product) => (
                     <div className="col" key={product.slug}>
                         <ProductCard product={product} />
                     </div>
