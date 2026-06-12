@@ -3,7 +3,7 @@ import { useState } from "react";
 export default function SearchBar({ setResults }) {
     const [query, setQuery] = useState("");
 
-    const handslSearch = () => {
+    const handleSearch = () => {
         fetch(`http://localhost:2222/search?query=${query}`)
             .then(res => res.json())
             .then(data => {
@@ -14,15 +14,15 @@ export default function SearchBar({ setResults }) {
     };
 
     return (
-        <div className="search-bar">
+        <div className="search-bar my-2">
             <input
                 type="text"
-                placeholder="Search..."
+                placeholder="Cerca..."
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
             />
 
-            <button onClick={handleSearch}>
+            <button className="btn bg-jurassik-orange text-white" onClick={handleSearch}>
                 Search
             </button>
         </div>

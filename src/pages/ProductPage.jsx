@@ -12,10 +12,8 @@ const ITEMS_PER_PAGE = 10;
 
 function ProductPage() {
     const [searchResults, setSearchResults] = useState(null);
-    
     const { products, loading, error } = useProduct();
     const { categories } = useCategories();
-
     const [selectedCategory, setSelectedCategory] = useState("");
     const [currentPage, setCurrentPage] = useState(1);
 
