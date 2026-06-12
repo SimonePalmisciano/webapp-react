@@ -2,6 +2,7 @@ import { useNavigate, useParams } from "react-router";
 import { useEffect, useState } from "react";
 import ReviewCard from "../components/ReviewCard";
 import { BASE_API_URL, PRICE_VALUE } from "../utils/api.js";
+import VoteStars from "../components/VoteStars.jsx";
 
 function ProductDetailPage() {
     const { productSlug } = useParams();
@@ -23,8 +24,7 @@ function ProductDetailPage() {
                 }
                 setProduct(data.result)
             })
-            .catch(error => {
-                console.error(error);
+            .catch(() => {
                 navigate("/404");
             });
 
@@ -35,14 +35,14 @@ function ProductDetailPage() {
 
     if (!product) return <p>Loading ...</p>;
 
-    let sommaVoti = 0;
+    let voteSum = 0;
     reviews.forEach(review => {
-        sommaVoti += review.vote;
+        voteSum += review.vote;
     })
 
-    let mediaVoti = sommaVoti / reviews.length;
+    let voteAverage = voteSum / reviews.length;
 
-    const stars = Math.ceil(mediaVoti);
+    const stars = voteAverage;
 
     return (
         <div>
@@ -53,17 +53,9 @@ function ProductDetailPage() {
                     </div>
                     <div className="col-12 col-md-8">
                         <h2>{product.name}</h2>
-                        <div className="recensioni d-flex align-items-center">
-                            <div>{mediaVoti}</div>
-                            <div className="stars">
-                                {[1, 2, 3, 4, 5].map((index) =>
-                                    index <= stars ? (
-                                        <i key={index} className="bi bi-star-fill star"></i>
-                                    ) : (
-                                        <i key={index} className="bi bi-star star"></i>
-                                    )
-                                )}
-                            </div>
+                        <div className="recensioni d-flex gap-1 align-items-center">
+                            <div>{voteAverage.toFixed(2) || 0}</div>
+                            <VoteStars stars={stars}/>
                             <div className="separator">|</div>
                             <div>({reviews.length}) {reviews.length === 1 ? <span>Recensione</span> : <span>Recensioni</span>}</div>
                         </div>

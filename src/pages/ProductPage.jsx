@@ -10,7 +10,6 @@ import useDebounce from "../hooks/useDebounce.js";
 const MAX_ITEMS_PER_PAGE = 9;
 
 function ProductPage() {
-    const [query] = useState("");
     const [debouncedQuery, setSearchTerms, searchTerms] = useDebounce("", 500);
     const [currentOffset, setCurrentOffset] = useState(0);
     const [selectedCategory, setSelectedCategory] = useState("any");
@@ -97,7 +96,7 @@ function ProductPage() {
                                 }
                                 }
                             />
-                            {category.slug === "burgers" ? "Panini" : category.label}
+                            {category.label}
                         </label>
                     ))}
                 </div>

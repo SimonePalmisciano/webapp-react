@@ -1,4 +1,5 @@
 import useLikesUpdate from "../hooks/useLikesUpdate"
+import VoteStars from "./VoteStars";
 
 function ReviewCard({ review }) {
 
@@ -14,7 +15,7 @@ function ReviewCard({ review }) {
                     </div>
 
                     <div className="px-3 py-2 rounded-pill border">
-                        <span className="">Voto: </span><span>{review.vote}/5</span>
+                        <VoteStars stars={review.vote}/>
                     </div>
                 </div>
 
