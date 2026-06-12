@@ -64,7 +64,7 @@ function ProductPage() {
         requestAnimationFrame(() => {
             scrollToHeaderBottom("smooth");
         });
-    }, [currentOffset, selectedCategory]);
+    }, [currentOffset, selectedCategory, loading]);
 
     const handlePrevPage = () => {
         setCurrentOffset((prev) => Math.max(prev - MAX_ITEMS_PER_PAGE, 0));
@@ -75,7 +75,6 @@ function ProductPage() {
         );
     };
 
-    if (loading) return <div className="container py-4">Caricamento prodotti...</div>;
 
     return (
         <div className="container py-4 text-jurassik-light">

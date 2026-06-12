@@ -12,6 +12,7 @@ function App() {
 
   return (
 
+
       <CategoryProvider>
       <BrowserRouter>
         <Routes>
@@ -27,6 +28,7 @@ function App() {
         </Routes>
       </BrowserRouter>
       </CategoryProvider>
+
 
   )
 }

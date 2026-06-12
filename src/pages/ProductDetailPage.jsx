@@ -24,7 +24,7 @@ function ProductDetailPage() {
                 }
                 setProduct(data.result)
             })
-            .catch(() => {
+            .catch((error) => {
                 navigate("/404");
             });
 
@@ -49,7 +49,7 @@ function ProductDetailPage() {
             <div className="container text-jurassik-light">
                 <div className="row">
                     <div className="col-12 col-md-4 border border-jurassik-dark rounded p-0">
-                        <img className="img-fluid rounded" src={product.image} alt={product.slug}></img>
+                        <img className="img-fluid rounded details-image" src={product.image} alt={product.slug}></img>
                     </div>
                     <div className="col-12 col-md-8">
                         <h2>{product.name}</h2>

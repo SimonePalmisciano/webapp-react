@@ -139,3 +139,8 @@ h5{
     color: #ffc107;
     font-size: 0.9rem;
 }
+
+.details-image{
+    object-fit:cover;
+    min-height:500px;
+}

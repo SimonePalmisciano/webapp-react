@@ -4,7 +4,7 @@ import { PRICE_VALUE } from "../../utils/api.js";
 function ProductCard({ product }) {
     const { name, price, categories, geological_era, image, slug } = product;
     return (
-        <Link to={`/products/${slug}`}>
+        <Link to={`/products/${slug}`} preventScrollReset>
             <div className="card h-100 product-card" data-bs-theme="dark">
                 <img src={image} className="card-img-top product-image" alt={name} />
                 <div className="card-body d-flex flex-column">
