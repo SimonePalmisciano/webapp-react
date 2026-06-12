@@ -1,7 +1,7 @@
 import useProduct from "../hooks/useProduct.js";
 import ProductCard from "./ProductCard/ProductCard";
 function LatestProducts() {
-    const {products, loading, error} = useProduct("?orderBy=updated_at&limit=5");
+    const {products, loading, error} = useProduct("?orderBy=updated_at&limit=6");
 
     return (
         <div className="container text-jurassik-light">
