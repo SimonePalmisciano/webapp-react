@@ -48,22 +48,24 @@ function ProductPage() {
     }, []);
 
     useEffect(() => {
-        if (searchTerms !== "") {
+        if (searchTerms !== "" || selectedCategory !== "any") {
             setSearchResults(products.length);
         }
         else {
             setSearchResults(productCount);
         }
-    }, [searchTerms, setSearchResults, products, productCount]);
+    }, [searchTerms, setSearchResults, products, productCount, selectedCategory]);
 
 
     //Quando cambio pagina il focus torna sempre in cima
     useEffect(() => {
         if (loading) return;
 
-        requestAnimationFrame(() => {
+        const frameId = requestAnimationFrame(() => {
             scrollToHeaderBottom("smooth");
         });
+
+        return () => {cancelAnimationFrame(frameId)};
     }, [currentOffset, selectedCategory, loading]);
 
     const handlePrevPage = () => {
