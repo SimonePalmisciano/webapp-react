@@ -4,10 +4,14 @@ import useProduct from "../hooks/useProduct.js";
 import useCategories from "../hooks/useCategories.js";
 import { useEffect } from "react";
 
+const ITEMS_PER_PAGE = 10;
+
 function ProductPage() {
     const { products, loading, error } = useProduct();
     const { categories } = useCategories();
+
     const [selectedCategory, setSelectedCategory] = useState("");
+    const [currentPage, setCurrentPage] = useState(1);
 
     const filteredProducts = selectedCategory
         ? products.filter(
@@ -16,10 +20,41 @@ function ProductPage() {
                 product.categories.some((cat) => cat?.label === selectedCategory)
         )
         : products;
+
+    const totalPages = Math.max(1, Math.ceil(filteredProducts.length / ITEMS_PER_PAGE));
+
+    const offset = (currentPage - 1) * ITEMS_PER_PAGE;
+    const paginatedProducts = filteredProducts.slice(offset, offset + ITEMS_PER_PAGE);
+
     // Aggiunta useEffect per riportare lo scroll all'inizio della pagina quando viene caricato il componente    
-    useEffect(()=>{
+    useEffect(() => {
         window.scrollTo(0, 0);
     }, []);
+
+    //Quando cambio categoria torno sempre a pagina 1
+    useEffect(() => {
+        setCurrentPage(1);
+    }, [selectedCategory]);
+
+    //Se i risultati diminuiscono mantengo currentPage valida
+    useEffect(() => {
+        if (currentPage > totalPages) {
+            setCurrentPage(totalPages);
+        }
+    }, [currentPage, totalPages]);
+
+    //Quando cambio pagina il focus torna sempre in cima
+    useEffect(() => {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+    }, [currentPage]);
+
+    const handlePrevPage = () => {
+        setCurrentPage((prev) => Math.max(prev - 1, 1));
+    };
+
+    const handleNextPage = () => {
+        setCurrentPage((prev) => Math.min(prev + 1, totalPages)); 
+    };
 
     if (loading) return <div className="container py-4">Caricamento prodotti...</div>;
     if (error) return <div className="container py-4 alert alert-danger">{error}</div>;
@@ -59,8 +94,37 @@ function ProductPage() {
                 </div>
             </div>
 
+            {filteredProducts.length === 0 ? (
+                <div className="alert alert-warning">
+                    Nessun prodotto disponibile per questa categoria.
+                </div>
+            ) : (
+                <>
+                    <ProductList products={paginatedProducts} />
 
-            <ProductList products={filteredProducts} />
+                    <div className="d-flex justify-content-center align-items-center gap-3 mt-4">
+                        <button
+                            className="btn btn-secondary"
+                            onClick={handlePrevPage}
+                            disabled={currentPage === 1}
+                        >
+                            Pagina precedente
+                        </button>
+
+                        <span className="fw-semibold">
+                            Pagina {currentPage} di {totalPages}
+                        </span>
+
+                        <button
+                            className="btn btn-secondary"
+                            onClick={handleNextPage}
+                            disabled={currentPage === totalPages}
+                        >
+                            Pagina successiva
+                        </button>
+                    </div>
+                </>
+            )}
         </div>
     );
 }
