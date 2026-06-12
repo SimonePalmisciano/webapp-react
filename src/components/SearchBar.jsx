@@ -1,9 +1,10 @@
 
 
-export default function SearchBar({setSearchTerms, query, setQuery }) {
+export default function SearchBar({setSearchTerms, query, setQuery, setCurrentOffset }) {
 
     const handleSearch = () => {
         setSearchTerms(query);
+        setCurrentOffset(0);
     }
     
     return (

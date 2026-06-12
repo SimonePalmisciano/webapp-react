@@ -21,7 +21,7 @@ function ProductPage() {
         ? products.filter(
             (product) =>
                 Array.isArray(product.categories) &&
-                product.categories.some((cat) => {return selectedCategory === "any" ? true : cat?.label === selectedCategory})
+                product.categories.some((cat) => { return selectedCategory === "any" ? true : cat?.label === selectedCategory })
         )
         : products;
 
@@ -30,14 +30,14 @@ function ProductPage() {
         window.scrollTo(0, 0);
     }, []);
 
-    useEffect( () => {
-        if(searchTerms !== ""){
+    useEffect(() => {
+        if (searchTerms !== "") {
             setSearchResults(products.length);
         }
-        else{
+        else {
             setSearchResults(productCount);
         }
-    },[searchTerms, setSearchResults, products, productCount]);
+    }, [searchTerms, setSearchResults, products, productCount]);
 
 
     //Quando cambio pagina il focus torna sempre in cima
@@ -55,14 +55,13 @@ function ProductPage() {
     };
 
     if (loading) return <div className="container py-4">Caricamento prodotti...</div>;
-    if (error) return <div className="container py-4 alert alert-danger">{error}</div>;
 
     return (
         <div className="container py-4 text-jurassik-light">
             <h1 className="h1-5 mb-3">Prodotti</h1>
 
 
-            <SearchBar setSearchTerms={setSearchTerms} query={query} setQuery={setQuery} />
+            <SearchBar setSearchTerms={setSearchTerms} query={query} setQuery={setQuery} setCurrentOffset={setCurrentOffset} />
 
             <div className="mb-4 py-4 sticky-top bg-jurassik-orange rounded px-2">
                 <p className="mb-2 fw-semibold">Filtra per categoria</p>
@@ -77,7 +76,7 @@ function ProductPage() {
                             onChange={() => {
                                 setCurrentOffset(0);
                                 setSelectedCategory("any");
-                                }
+                            }
                             }
                         />
                         Tutte
@@ -94,7 +93,7 @@ function ProductPage() {
                                 onChange={(e) => {
                                     setCurrentOffset(0);
                                     setSelectedCategory(e.target.value);
-                                    }
+                                }
                                 }
                             />
                             {category.slug === "burgers" ? "Panini" : category.label}
@@ -109,22 +108,28 @@ function ProductPage() {
                 </div>
             ) : (
                 <>
-                    <PageNavigator
-                        currentOffset={currentOffset}
-                        MAX_ITEMS_PER_PAGE={MAX_ITEMS_PER_PAGE}
-                        handlePrevPage={handlePrevPage}
-                        handleNextPage={handleNextPage}
-                        productCount={Math.min(productCount, searchResults)}
-                    />
-                    <ProductList products={products} />
-                    <PageNavigator
-                        currentOffset={currentOffset}
-                        MAX_ITEMS_PER_PAGE={MAX_ITEMS_PER_PAGE}
-                        handlePrevPage={handlePrevPage}
-                        handleNextPage={handleNextPage}
-                        productCount={Math.min(productCount, searchResults)}
-                    />
-
+                    {!error ?
+                        <div>
+                            <PageNavigator
+                                currentOffset={currentOffset}
+                                MAX_ITEMS_PER_PAGE={MAX_ITEMS_PER_PAGE}
+                                handlePrevPage={handlePrevPage}
+                                handleNextPage={handleNextPage}
+                                productCount={Math.min(productCount, searchResults)}
+                            />
+                            <ProductList products={products} />
+                            <PageNavigator
+                                currentOffset={currentOffset}
+                                MAX_ITEMS_PER_PAGE={MAX_ITEMS_PER_PAGE}
+                                handlePrevPage={handlePrevPage}
+                                handleNextPage={handleNextPage}
+                                productCount={Math.min(productCount, searchResults)}
+                            />
+                        </div> :
+                        <div>
+                            <h3>Qualsiasi cosa tu stia cercando... i nostri cacciatori ancora non l'hanno trovata</h3>
+                        </div>
+                    }
                 </>
             )}
         </div>

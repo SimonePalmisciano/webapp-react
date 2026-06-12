@@ -11,15 +11,9 @@ function useProduct(searchParams, isProductPage = false) {
 
         fetch(`${BASE_API_URL}/products/${searchParams.toString()}`)
             .then(response => {
-                if (!response.ok) {
-                    throw new Error("Errore nel recupero dei prodotti");
-                }
                 return response.json();
             })
             .then(data => {
-                if (data.error) {
-                    throw new Error(data.error);
-                }
                 setProducts(data.result || []);
             })
             .catch(error => {
@@ -32,15 +26,9 @@ function useProduct(searchParams, isProductPage = false) {
             fetch(`${BASE_API_URL}/products/count`)
             .then(response => {
                 setLoading(true);
-                if (!response.ok){
-                    throw new Error("Errore nel recupero del count dei prodotti");
-                }
                 return response.json();
             })
             .then(data => {
-                if(data.error){
-                    throw new Error(data.error);
-                }
                 setProductCount(data.result || 0);
             })
             .catch(error => {
