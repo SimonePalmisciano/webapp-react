@@ -48,9 +48,9 @@ function AboutPage() {
                         <div className="col-12 col-md-6">
                             <div className="card h-100 shadow-sm border-0 rounded-4">
                                 <div className="card-body p-4">
-                                    <h2 className="h3 fw-bold mb-3 text-jurassik-dark" >
+                                    <h3 className="fw-bold mb-3 text-jurassik-dark" >
                                         La storia del negozio
-                                    </h2>
+                                    </h3>
                                     <p>
                                         Jurassic Pork nasce dall’idea di unire il mondo dei
                                         dinosauri con quello dei burger. Volevamo creare un locale
@@ -71,9 +71,9 @@ function AboutPage() {
                                 className="card h-100 shadow-sm border-0 rounded-4 bg-jurassik-dark"
                             >
                                 <div className="card-body p-4 text-jurassik-light ">
-                                    <h2 className="h3 fw-bold mb-3 ">
+                                    <h3 className="fw-bold mb-3 ">
                                         La nostra idea
-                                    </h2>
+                                    </h3>
                                     <p>
                                         Non volevamo fare una hamburgheria uguale alle altre. Per
                                         questo abbiamo pensato a un tema giurassico, con colori

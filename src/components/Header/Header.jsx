@@ -7,7 +7,7 @@ function Header() {
             <NavBar/>
             <div className="container py-4 text-jurassik-light ">
                 <h1 className="mb-1">Jurassic Pork</h1>
-                <p className=" mb-0">
+                <p className=" mb-0 subtitle">
                     Panini, bites e sapori preistorici
                 </p>
             </div>

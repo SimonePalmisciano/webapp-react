@@ -66,7 +66,7 @@ function ProductPage() {
 
     return (
         <div className="container py-4 text-jurassik-light">
-            <h1 className="h4 mb-3">Prodotti</h1>
+            <h1 className="h1-5 mb-3">Prodotti</h1>
 
 
             <SearchBar setResults={setSearchResults} />

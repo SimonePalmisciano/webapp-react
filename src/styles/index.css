@@ -1,6 +1,6 @@
 @font-face {
-    font-family: 'Prehistoric_Caveman';
-    src: url('../fonts/Prehistoric_Caveman.ttf') format('truetype');
+    font-family: 'Thertole';
+    src: url('../fonts/Thertole.otf') format('opentype');
     font-weight: normal;
     font-style: normal;
 }
@@ -30,7 +30,7 @@ a {
 }
 
 body {
-    font-family: "Knewave", "sans-serif";
+    font-family: "Montserrat", "sans-serif";
 }
 
 h1,
@@ -39,8 +39,32 @@ h3,
 h4,
 h5,
 h6 {
-    font-family: "Prehistoric_Caveman", "sans-serif";
-    line-height: 2;
+    font-family: "Thertole", "sans-serif";
+    line-height: 1;
+    
+}
+
+h1{
+    font-size: 10rem !important;
+    line-height: normal !important;
+}
+h2{
+    font-size: 4rem !important;
+}
+h3{
+    font-size: 2.5rem !important;
+}
+h4,
+h5{
+    font-size: 2rem !important;
+}
+
+.h1-5{
+    font-size: 6rem !important;
+}
+
+.subtitle{
+    font-size: 2rem;
 }
 
 .logo {
