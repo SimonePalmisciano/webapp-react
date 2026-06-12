@@ -3,10 +3,16 @@ import ProductList from "../components/ProductList/ProductList";
 import useProduct from "../hooks/useProduct.js";
 import useCategories from "../hooks/useCategories.js";
 import { useEffect } from "react";
+import SearchBar from "../components/SearchBar";
+
 
 const ITEMS_PER_PAGE = 10;
 
+
+
 function ProductPage() {
+    const [searchResults, setSearchResults] = useState(null);
+    
     const { products, loading, error } = useProduct();
     const { categories } = useCategories();
 
@@ -53,15 +59,37 @@ function ProductPage() {
     };
 
     const handleNextPage = () => {
-        setCurrentPage((prev) => Math.min(prev + 1, totalPages)); 
+        setCurrentPage((prev) => Math.min(prev + 1, totalPages));
     };
 
     if (loading) return <div className="container py-4">Caricamento prodotti...</div>;
     if (error) return <div className="container py-4 alert alert-danger">{error}</div>;
 
+
+    if (searchResults !== null) {
+        return (
+            <div className="container py-4 text-jurassik-light">
+                <h1 className="h4 mb-3">Prodotti</h1>
+
+                <SearchBar setResults={setSearchResults} />
+
+                {searchResults.length === 0 ? (
+                    <div className="alert alert-warning mt-4">
+                        Nessun prodotto trovato.
+                    </div>
+                ) : (
+                    <ProductList products={searchResults} />
+                )}
+            </div>
+        );
+    }
+
     return (
         <div className="container py-4 text-jurassik-light">
             <h1 className="h4 mb-3">Prodotti</h1>
+
+
+            <SearchBar setResults={setSearchResults} />
 
             <div className="mb-4 py-4 sticky-top bg-jurassik-orange rounded px-2">
                 <p className="mb-2 fw-semibold">Filtra per categoria</p>
