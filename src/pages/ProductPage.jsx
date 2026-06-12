@@ -6,24 +6,19 @@ import { useEffect } from "react";
 import SearchBar from "../components/SearchBar";
 import PageNavigator from "../components/PageNavigator.jsx";
 import useDebounce from "../hooks/useDebounce.js";
+import { useSearchParams } from "react-router";
 
 const MAX_ITEMS_PER_PAGE = 9;
 
 function ProductPage() {
-    const [debouncedQuery, setSearchTerms, searchTerms] = useDebounce("", 500);
+    const [query, setQuery] = useSearchParams();
+    const [debouncedQuery, setSearchTerms, searchTerms] = useDebounce(query.get("search") ? query.get("search") : "", 500);
     const [currentOffset, setCurrentOffset] = useState(0);
     const [selectedCategory, setSelectedCategory] = useState("any");
     const { products, loading, error, productCount } = useProduct(`?limit=${MAX_ITEMS_PER_PAGE}&offset=${currentOffset}&category=${selectedCategory}&search=${debouncedQuery}`, true);
     const { categories } = useCategories();
     const [searchResults, setSearchResults] = useState(productCount);
 
-    const filteredProducts = selectedCategory
-        ? products.filter(
-            (product) =>
-                Array.isArray(product.categories) &&
-                product.categories.some((cat) => { return selectedCategory === "any" ? true : cat?.label === selectedCategory })
-        )
-        : products;
 
     const scrollToHeaderBottom = (behavior = "auto") => {
         const header = document.getElementById("site-header");
@@ -35,17 +30,30 @@ function ProductPage() {
 
         const rect = header.getBoundingClientRect();
         const bottomY = rect.bottom + window.scrollY;
-
-        window.scrollTo({
-            top: Math.max(bottomY, 0),
-            behavior
-        });
+        if (bottomY > rect.bottom) {
+            window.scrollTo({
+                top: Math.max(bottomY, 0),
+                behavior
+            });
+        }
     }
 
     // Aggiunta useEffect per riportare lo scroll all'inizio della pagina quando viene caricato il componente    
     useEffect(() => {
         scrollToHeaderBottom("auto");
     }, []);
+    // `?limit=${MAX_ITEMS_PER_PAGE}&offset=${currentOffset}&category=${selectedCategory}&search=${debouncedQuery}`
+    useEffect(() => {
+
+            setQuery(
+                {
+                    search: debouncedQuery,
+                    limit: MAX_ITEMS_PER_PAGE,
+                    offset: currentOffset,
+                    category: selectedCategory
+                });
+
+    }, [debouncedQuery, setQuery, currentOffset, selectedCategory]);
 
     useEffect(() => {
         if (searchTerms !== "" || selectedCategory !== "any") {
@@ -61,11 +69,10 @@ function ProductPage() {
     useEffect(() => {
         if (loading) return;
 
-        const frameId = requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
             scrollToHeaderBottom("smooth");
         });
 
-        return () => {cancelAnimationFrame(frameId)};
     }, [currentOffset, selectedCategory, loading]);
 
     const handlePrevPage = () => {
@@ -76,14 +83,9 @@ function ProductPage() {
         setCurrentOffset((prev) => Math.min(prev + MAX_ITEMS_PER_PAGE, productCount)
         );
     };
-
-
     return (
-        <div className="container py-4 text-jurassik-light">
+        <div className="container py-4 text-jurassik-light main-container">
             <h1 className="h1-5 mb-3">Prodotti</h1>
-
-
-
             <div className="mb-4 pb-4 pt-2 sticky-top bg-jurassik-orange rounded px-2">
                 <SearchBar query={searchTerms} setQuery={setSearchTerms} setCurrentOffset={setCurrentOffset} />
                 <p className="mb-2 fw-semibold">Filtra per categoria</p>
@@ -124,38 +126,29 @@ function ProductPage() {
                 </div>
             </div>
 
-            {filteredProducts.length === 0 ? (
+            {!error ?
+                <div>
+                    <PageNavigator
+                        currentOffset={currentOffset}
+                        MAX_ITEMS_PER_PAGE={MAX_ITEMS_PER_PAGE}
+                        handlePrevPage={handlePrevPage}
+                        handleNextPage={handleNextPage}
+                        productCount={Math.min(productCount, searchResults)}
+                    />
+                    <ProductList products={products} />
+                    <PageNavigator
+                        currentOffset={currentOffset}
+                        MAX_ITEMS_PER_PAGE={MAX_ITEMS_PER_PAGE}
+                        handlePrevPage={handlePrevPage}
+                        handleNextPage={handleNextPage}
+                        productCount={Math.min(productCount, searchResults)}
+                    />
+                </div> :
                 <div className="alert alert-warning">
-                    <h3 className="text-center">
-                        🦕 Qualsiasi cosa tu stia cercando... i nostri cacciatori ancora non l'hanno trovata 🦕
-                    </h3>
+                    <h3 className="text-center"> 🦕 Qualsiasi cosa tu stia cercando... i nostri cacciatori ancora non l'hanno trovata 🦕</h3>
                 </div>
-            ) : (
-                <>
-                    {!error ?
-                        <div>
-                            <PageNavigator
-                                currentOffset={currentOffset}
-                                MAX_ITEMS_PER_PAGE={MAX_ITEMS_PER_PAGE}
-                                handlePrevPage={handlePrevPage}
-                                handleNextPage={handleNextPage}
-                                productCount={Math.min(productCount, searchResults)}
-                            />
-                            <ProductList products={products} />
-                            <PageNavigator
-                                currentOffset={currentOffset}
-                                MAX_ITEMS_PER_PAGE={MAX_ITEMS_PER_PAGE}
-                                handlePrevPage={handlePrevPage}
-                                handleNextPage={handleNextPage}
-                                productCount={Math.min(productCount, searchResults)}
-                            />
-                        </div> :
-                        <div className="alert alert-warning">
-                            <h3 className="text-center"> 🦕 Qualsiasi cosa tu stia cercando... i nostri cacciatori ancora non l'hanno trovata 🦕</h3>
-                        </div>
-                    }
-                </>
-            )}
+            }
+
         </div>
     );
 }
