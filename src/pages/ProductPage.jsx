@@ -4,60 +4,42 @@ import useProduct from "../hooks/useProduct.js";
 import useCategories from "../hooks/useCategories.js";
 import { useEffect } from "react";
 import SearchBar from "../components/SearchBar";
+import PageNavigator from "../components/PageNavigator.jsx";
 
-
-const ITEMS_PER_PAGE = 10;
-
-
+const MAX_ITEMS_PER_PAGE = 9;
 
 function ProductPage() {
     const [searchResults, setSearchResults] = useState(null);
-    const { products, loading, error } = useProduct();
+    const [currentOffset, setCurrentOffset] = useState(0);
+    const [selectedCategory, setSelectedCategory] = useState("any");
+    const { products, loading, error, productCount } = useProduct(`?limit=${MAX_ITEMS_PER_PAGE}&offset=${currentOffset}&category=${selectedCategory}`, true);
     const { categories } = useCategories();
-    const [selectedCategory, setSelectedCategory] = useState("");
-    const [currentPage, setCurrentPage] = useState(1);
 
     const filteredProducts = selectedCategory
         ? products.filter(
             (product) =>
                 Array.isArray(product.categories) &&
-                product.categories.some((cat) => cat?.label === selectedCategory)
+                product.categories.some((cat) => {return selectedCategory === "any" ? true : cat?.label === selectedCategory})
         )
         : products;
-
-    const totalPages = Math.max(1, Math.ceil(filteredProducts.length / ITEMS_PER_PAGE));
-
-    const offset = (currentPage - 1) * ITEMS_PER_PAGE;
-    const paginatedProducts = filteredProducts.slice(offset, offset + ITEMS_PER_PAGE);
 
     // Aggiunta useEffect per riportare lo scroll all'inizio della pagina quando viene caricato il componente    
     useEffect(() => {
         window.scrollTo(0, 0);
     }, []);
 
-    //Quando cambio categoria torno sempre a pagina 1
-    useEffect(() => {
-        setCurrentPage(1);
-    }, [selectedCategory]);
-
-    //Se i risultati diminuiscono mantengo currentPage valida
-    useEffect(() => {
-        if (currentPage > totalPages) {
-            setCurrentPage(totalPages);
-        }
-    }, [currentPage, totalPages]);
-
     //Quando cambio pagina il focus torna sempre in cima
     useEffect(() => {
         window.scrollTo({ top: 0, behavior: "smooth" });
-    }, [currentPage]);
+    }, [currentOffset, selectedCategory]);
 
     const handlePrevPage = () => {
-        setCurrentPage((prev) => Math.max(prev - 1, 1));
+        setCurrentOffset((prev) => Math.max(prev - MAX_ITEMS_PER_PAGE, 0));
     };
 
     const handleNextPage = () => {
-        setCurrentPage((prev) => Math.min(prev + 1, totalPages));
+        setCurrentOffset((prev) => Math.min(prev + MAX_ITEMS_PER_PAGE, productCount)
+        );
     };
 
     if (loading) return <div className="container py-4">Caricamento prodotti...</div>;
@@ -98,8 +80,12 @@ function ProductPage() {
                             type="radio"
                             name="category"
                             value=""
-                            checked={selectedCategory === ""}
-                            onChange={() => setSelectedCategory("")}
+                            checked={selectedCategory === "any"}
+                            onChange={() => {
+                                setCurrentOffset(0);
+                                setSelectedCategory("any");
+                                }
+                            }
                         />
                         Tutte
                     </label>
@@ -112,7 +98,11 @@ function ProductPage() {
                                 name="category"
                                 value={category.label}
                                 checked={selectedCategory === category.label}
-                                onChange={(e) => setSelectedCategory(e.target.value)}
+                                onChange={(e) => {
+                                    setCurrentOffset(0);
+                                    setSelectedCategory(e.target.value);
+                                    }
+                                }
                             />
                             {category.slug === "burgers" ? "Panini" : category.label}
                         </label>
@@ -126,29 +116,22 @@ function ProductPage() {
                 </div>
             ) : (
                 <>
-                    <ProductList products={paginatedProducts} />
+                    <PageNavigator
+                        currentOffset={currentOffset}
+                        MAX_ITEMS_PER_PAGE={MAX_ITEMS_PER_PAGE}
+                        handlePrevPage={handlePrevPage}
+                        handleNextPage={handleNextPage}
+                        productCount={productCount}
+                    />
+                    <ProductList products={products} />
+                    <PageNavigator
+                        currentOffset={currentOffset}
+                        MAX_ITEMS_PER_PAGE={MAX_ITEMS_PER_PAGE}
+                        handlePrevPage={handlePrevPage}
+                        handleNextPage={handleNextPage}
+                        productCount={productCount}
+                    />
 
-                    <div className="d-flex justify-content-center align-items-center gap-3 mt-4">
-                        <button
-                            className="btn btn-secondary"
-                            onClick={handlePrevPage}
-                            disabled={currentPage === 1}
-                        >
-                            Pagina precedente
-                        </button>
-
-                        <span className="fw-semibold">
-                            Pagina {currentPage} di {totalPages}
-                        </span>
-
-                        <button
-                            className="btn btn-secondary"
-                            onClick={handleNextPage}
-                            disabled={currentPage === totalPages}
-                        >
-                            Pagina successiva
-                        </button>
-                    </div>
                 </>
             )}
         </div>
