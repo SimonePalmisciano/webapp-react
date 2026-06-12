@@ -1,18 +1,11 @@
-import { useState } from "react";
 
-export default function SearchBar({ setResults }) {
-    const [query, setQuery] = useState("");
+
+export default function SearchBar({setSearchTerms, query, setQuery }) {
 
     const handleSearch = () => {
-        fetch(`http://localhost:2222/search?query=${query}`)
-            .then(res => res.json())
-            .then(data => {
-                setResults(data);
-            })
-            .catch(err => console.error(err));
-
-    };
-
+        setSearchTerms(query);
+    }
+    
     return (
         <div className="search-bar my-2">
             <input

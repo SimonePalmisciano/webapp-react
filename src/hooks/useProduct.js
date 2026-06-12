@@ -55,7 +55,8 @@ function useProduct(searchParams, isProductPage = false) {
         products,
         loading,
         error,
-        productCount
+        productCount,
+        setProductCount
     }
 }
 

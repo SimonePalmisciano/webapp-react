@@ -9,11 +9,13 @@ import PageNavigator from "../components/PageNavigator.jsx";
 const MAX_ITEMS_PER_PAGE = 9;
 
 function ProductPage() {
-    const [searchResults, setSearchResults] = useState(null);
+    const [query, setQuery] = useState("");
+    const [searchTerms, setSearchTerms] = useState("");
     const [currentOffset, setCurrentOffset] = useState(0);
     const [selectedCategory, setSelectedCategory] = useState("any");
-    const { products, loading, error, productCount } = useProduct(`?limit=${MAX_ITEMS_PER_PAGE}&offset=${currentOffset}&category=${selectedCategory}`, true);
+    const { products, loading, error, productCount } = useProduct(`?limit=${MAX_ITEMS_PER_PAGE}&offset=${currentOffset}&category=${selectedCategory}&search=${searchTerms}`, true);
     const { categories } = useCategories();
+    const [searchResults, setSearchResults] = useState(productCount);
 
     const filteredProducts = selectedCategory
         ? products.filter(
@@ -27,6 +29,16 @@ function ProductPage() {
     useEffect(() => {
         window.scrollTo(0, 0);
     }, []);
+
+    useEffect( () => {
+        if(searchTerms !== ""){
+            setSearchResults(products.length);
+        }
+        else{
+            setSearchResults(productCount);
+        }
+    },[searchTerms, setSearchResults, products, productCount]);
+
 
     //Quando cambio pagina il focus torna sempre in cima
     useEffect(() => {
@@ -45,31 +57,12 @@ function ProductPage() {
     if (loading) return <div className="container py-4">Caricamento prodotti...</div>;
     if (error) return <div className="container py-4 alert alert-danger">{error}</div>;
 
-
-    if (searchResults !== null) {
-        return (
-            <div className="container py-4 text-jurassik-light">
-                <h1 className="h4 mb-3">Prodotti</h1>
-
-                <SearchBar setResults={setSearchResults} />
-
-                {searchResults.length === 0 ? (
-                    <div className="alert alert-warning mt-4">
-                        Nessun prodotto trovato.
-                    </div>
-                ) : (
-                    <ProductList products={searchResults} />
-                )}
-            </div>
-        );
-    }
-
     return (
         <div className="container py-4 text-jurassik-light">
             <h1 className="h1-5 mb-3">Prodotti</h1>
 
 
-            <SearchBar setResults={setSearchResults} />
+            <SearchBar setSearchTerms={setSearchTerms} query={query} setQuery={setQuery} />
 
             <div className="mb-4 py-4 sticky-top bg-jurassik-orange rounded px-2">
                 <p className="mb-2 fw-semibold">Filtra per categoria</p>
@@ -121,7 +114,7 @@ function ProductPage() {
                         MAX_ITEMS_PER_PAGE={MAX_ITEMS_PER_PAGE}
                         handlePrevPage={handlePrevPage}
                         handleNextPage={handleNextPage}
-                        productCount={productCount}
+                        productCount={Math.min(productCount, searchResults)}
                     />
                     <ProductList products={products} />
                     <PageNavigator
@@ -129,7 +122,7 @@ function ProductPage() {
                         MAX_ITEMS_PER_PAGE={MAX_ITEMS_PER_PAGE}
                         handlePrevPage={handlePrevPage}
                         handleNextPage={handleNextPage}
-                        productCount={productCount}
+                        productCount={Math.min(productCount, searchResults)}
                     />
 
                 </>
