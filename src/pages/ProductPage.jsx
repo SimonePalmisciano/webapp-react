@@ -5,15 +5,16 @@ import useCategories from "../hooks/useCategories.js";
 import { useEffect } from "react";
 import SearchBar from "../components/SearchBar";
 import PageNavigator from "../components/PageNavigator.jsx";
+import useDebounce from "../hooks/useDebounce.js";
 
 const MAX_ITEMS_PER_PAGE = 9;
 
 function ProductPage() {
-    const [query, setQuery] = useState("");
-    const [searchTerms, setSearchTerms] = useState("");
+    const [query] = useState("");
+    const [debouncedQuery, setSearchTerms, searchTerms] = useDebounce("", 500);
     const [currentOffset, setCurrentOffset] = useState(0);
     const [selectedCategory, setSelectedCategory] = useState("any");
-    const { products, loading, error, productCount } = useProduct(`?limit=${MAX_ITEMS_PER_PAGE}&offset=${currentOffset}&category=${selectedCategory}&search=${searchTerms}`, true);
+    const { products, loading, error, productCount } = useProduct(`?limit=${MAX_ITEMS_PER_PAGE}&offset=${currentOffset}&category=${selectedCategory}&search=${debouncedQuery}`, true);
     const { categories } = useCategories();
     const [searchResults, setSearchResults] = useState(productCount);
 
@@ -61,9 +62,9 @@ function ProductPage() {
             <h1 className="h1-5 mb-3">Prodotti</h1>
 
 
-            <SearchBar setSearchTerms={setSearchTerms} query={query} setQuery={setQuery} setCurrentOffset={setCurrentOffset} />
 
-            <div className="mb-4 py-4 sticky-top bg-jurassik-orange rounded px-2">
+            <div className="mb-4 pb-4 pt-2 sticky-top bg-jurassik-orange rounded px-2">
+                <SearchBar query={searchTerms} setQuery={setSearchTerms} setCurrentOffset={setCurrentOffset} />
                 <p className="mb-2 fw-semibold">Filtra per categoria</p>
                 <div className="d-flex flex-wrap gap-3">
                     <label className="form-check-label">
@@ -104,7 +105,9 @@ function ProductPage() {
 
             {filteredProducts.length === 0 ? (
                 <div className="alert alert-warning">
-                    Nessun prodotto disponibile per questa categoria.
+                    <h3 className="text-center">
+                        🦕 Qualsiasi cosa tu stia cercando... i nostri cacciatori ancora non l'hanno trovata 🦕
+                    </h3>
                 </div>
             ) : (
                 <>
@@ -126,8 +129,8 @@ function ProductPage() {
                                 productCount={Math.min(productCount, searchResults)}
                             />
                         </div> :
-                        <div>
-                            <h3>Qualsiasi cosa tu stia cercando... i nostri cacciatori ancora non l'hanno trovata</h3>
+                        <div className="alert alert-warning">
+                            <h3 className="text-center"> 🦕 Qualsiasi cosa tu stia cercando... i nostri cacciatori ancora non l'hanno trovata 🦕</h3>
                         </div>
                     }
                 </>
