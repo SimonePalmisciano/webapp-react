@@ -14,9 +14,9 @@ function HeroSection() {
                         />
                     </div>
                     <div className="col-12 text-center">
-                        <h1 className="display-3 fw-bold mb-3">
+                        <h2 className="display-3 fw-bold mb-3">
                             Jurassic Pork
-                        </h1>
+                        </h2>
                         <p className="lead mb-4">
                             La hamburgheria preistorica dove ogni piatto è una scoperta
                             archeologica a base di carne.
