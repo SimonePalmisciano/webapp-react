@@ -35,6 +35,14 @@ function ProductDetailPage() {
 
     if (!product) return <p>Loading ...</p>;
 
+    let sommaVoti = 0;
+    reviews.forEach(review => {
+        sommaVoti += review.vote;
+    })
+
+    let mediaVoti = sommaVoti / reviews.length;
+
+    const stars = Math.ceil(mediaVoti);
 
     return (
         <div>
@@ -45,7 +53,20 @@ function ProductDetailPage() {
                     </div>
                     <div className="col-12 col-md-8">
                         <h2>{product.name}</h2>
-                        <div>({reviews.length}) {reviews.length === 1 ? <span>Recensione</span> : <span>Recensioni</span>}</div>
+                        <div className="recensioni d-flex align-items-center">
+                            <div>{mediaVoti}</div>
+                            <div className="stars">
+                                {[1, 2, 3, 4, 5].map((index) =>
+                                    index <= stars ? (
+                                        <i key={index} className="bi bi-star-fill star"></i>
+                                    ) : (
+                                        <i key={index} className="bi bi-star star"></i>
+                                    )
+                                )}
+                            </div>
+                            <div className="separator">|</div>
+                            <div>({reviews.length}) {reviews.length === 1 ? <span>Recensione</span> : <span>Recensioni</span>}</div>
+                        </div>
                         <hr></hr>
                         <p>{product.description}</p>
                         <div className="d-flex justify-content-between">
@@ -55,7 +76,7 @@ function ProductDetailPage() {
                             <span className="badge bg-jurassik-orange">Prezzo:  {`${PRICE_VALUE} ${product.price?.toFixed(2)}`}</span>
                         </div>
                     </div>
-                    <h2>Recensioni</h2> 
+                    <h2>Recensioni</h2>
                     {reviews.length === 0 && <p>Nessuna recensione</p>}
                     <div className="d-flex flex-column row-gap-2 border border-jurassik-dark rounded p-0">
                         {reviews.map(r => (

@@ -11,7 +11,6 @@ function ReviewCard({ review }) {
                 <div className="d-flex justify-content-between align-items-start">
                     <div>
                         <h5 className="mb-1 fw-bold">{review.title}</h5>
-                        <div className="small opacity-75">Recensione</div>
                     </div>
 
                     <div className="px-3 py-2 rounded-pill border">
