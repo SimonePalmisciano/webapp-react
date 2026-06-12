@@ -19,18 +19,39 @@ function ProductPage() {
         ? products.filter(
             (product) =>
                 Array.isArray(product.categories) &&
-                product.categories.some((cat) => {return selectedCategory === "any" ? true : cat?.label === selectedCategory})
+                product.categories.some((cat) => { return selectedCategory === "any" ? true : cat?.label === selectedCategory })
         )
         : products;
 
+    const scrollToHeaderBottom = (behavior = "auto") => {
+        const header = document.getElementById("site-header");
+
+        if (!header) {
+            window.scrollTo({ top: 0, behavior });
+            return;
+        }
+
+        const rect = header.getBoundingClientRect();
+        const bottomY = rect.bottom + window.scrollY;
+
+        window.scrollTo({
+            top: Math.max(bottomY, 0),
+            behavior
+        });
+    }
+
     // Aggiunta useEffect per riportare lo scroll all'inizio della pagina quando viene caricato il componente    
     useEffect(() => {
-        window.scrollTo(0, 0);
+        scrollToHeaderBottom("auto");
     }, []);
 
     //Quando cambio pagina il focus torna sempre in cima
     useEffect(() => {
-        window.scrollTo({ top: 0, behavior: "smooth" });
+        if (loading) return;
+
+        requestAnimationFrame(() => {
+            scrollToHeaderBottom("smooth");
+        });
     }, [currentOffset, selectedCategory]);
 
     const handlePrevPage = () => {
@@ -84,7 +105,7 @@ function ProductPage() {
                             onChange={() => {
                                 setCurrentOffset(0);
                                 setSelectedCategory("any");
-                                }
+                            }
                             }
                         />
                         Tutte
@@ -101,7 +122,7 @@ function ProductPage() {
                                 onChange={(e) => {
                                     setCurrentOffset(0);
                                     setSelectedCategory(e.target.value);
-                                    }
+                                }
                                 }
                             />
                             {category.slug === "burgers" ? "Panini" : category.label}
