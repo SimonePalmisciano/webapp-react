@@ -5,15 +5,17 @@ import useCategories from "../hooks/useCategories.js";
 import { useEffect } from "react";
 import SearchBar from "../components/SearchBar";
 import PageNavigator from "../components/PageNavigator.jsx";
+import useDebounce from "../hooks/useDebounce.js";
 
 const MAX_ITEMS_PER_PAGE = 9;
 
 function ProductPage() {
-    const [searchResults, setSearchResults] = useState(null);
+    const [debouncedQuery, setSearchTerms, searchTerms] = useDebounce("", 500);
     const [currentOffset, setCurrentOffset] = useState(0);
     const [selectedCategory, setSelectedCategory] = useState("any");
-    const { products, loading, error, productCount } = useProduct(`?limit=${MAX_ITEMS_PER_PAGE}&offset=${currentOffset}&category=${selectedCategory}`, true);
+    const { products, loading, error, productCount } = useProduct(`?limit=${MAX_ITEMS_PER_PAGE}&offset=${currentOffset}&category=${selectedCategory}&search=${debouncedQuery}`, true);
     const { categories } = useCategories();
+    const [searchResults, setSearchResults] = useState(productCount);
 
     const filteredProducts = selectedCategory
         ? products.filter(
@@ -45,6 +47,16 @@ function ProductPage() {
         scrollToHeaderBottom("auto");
     }, []);
 
+    useEffect(() => {
+        if (searchTerms !== "") {
+            setSearchResults(products.length);
+        }
+        else {
+            setSearchResults(productCount);
+        }
+    }, [searchTerms, setSearchResults, products, productCount]);
+
+
     //Quando cambio pagina il focus torna sempre in cima
     useEffect(() => {
         if (loading) return;
@@ -64,35 +76,15 @@ function ProductPage() {
     };
 
     if (loading) return <div className="container py-4">Caricamento prodotti...</div>;
-    if (error) return <div className="container py-4 alert alert-danger">{error}</div>;
-
-
-    if (searchResults !== null) {
-        return (
-            <div className="container py-4 text-jurassik-light">
-                <h1 className="h4 mb-3">Prodotti</h1>
-
-                <SearchBar setResults={setSearchResults} />
-
-                {searchResults.length === 0 ? (
-                    <div className="alert alert-warning mt-4">
-                        Nessun prodotto trovato.
-                    </div>
-                ) : (
-                    <ProductList products={searchResults} />
-                )}
-            </div>
-        );
-    }
 
     return (
         <div className="container py-4 text-jurassik-light">
             <h1 className="h1-5 mb-3">Prodotti</h1>
 
 
-            <SearchBar setResults={setSearchResults} />
 
-            <div className="mb-4 py-4 sticky-top bg-jurassik-orange rounded px-2">
+            <div className="mb-4 pb-4 pt-2 sticky-top bg-jurassik-orange rounded px-2">
+                <SearchBar query={searchTerms} setQuery={setSearchTerms} setCurrentOffset={setCurrentOffset} />
                 <p className="mb-2 fw-semibold">Filtra per categoria</p>
                 <div className="d-flex flex-wrap gap-3">
                     <label className="form-check-label">
@@ -125,7 +117,7 @@ function ProductPage() {
                                 }
                                 }
                             />
-                            {category.slug === "burgers" ? "Panini" : category.label}
+                            {category.label}
                         </label>
                     ))}
                 </div>
@@ -133,26 +125,34 @@ function ProductPage() {
 
             {filteredProducts.length === 0 ? (
                 <div className="alert alert-warning">
-                    Nessun prodotto disponibile per questa categoria.
+                    <h3 className="text-center">
+                        🦕 Qualsiasi cosa tu stia cercando... i nostri cacciatori ancora non l'hanno trovata 🦕
+                    </h3>
                 </div>
             ) : (
                 <>
-                    <PageNavigator
-                        currentOffset={currentOffset}
-                        MAX_ITEMS_PER_PAGE={MAX_ITEMS_PER_PAGE}
-                        handlePrevPage={handlePrevPage}
-                        handleNextPage={handleNextPage}
-                        productCount={productCount}
-                    />
-                    <ProductList products={products} />
-                    <PageNavigator
-                        currentOffset={currentOffset}
-                        MAX_ITEMS_PER_PAGE={MAX_ITEMS_PER_PAGE}
-                        handlePrevPage={handlePrevPage}
-                        handleNextPage={handleNextPage}
-                        productCount={productCount}
-                    />
-
+                    {!error ?
+                        <div>
+                            <PageNavigator
+                                currentOffset={currentOffset}
+                                MAX_ITEMS_PER_PAGE={MAX_ITEMS_PER_PAGE}
+                                handlePrevPage={handlePrevPage}
+                                handleNextPage={handleNextPage}
+                                productCount={Math.min(productCount, searchResults)}
+                            />
+                            <ProductList products={products} />
+                            <PageNavigator
+                                currentOffset={currentOffset}
+                                MAX_ITEMS_PER_PAGE={MAX_ITEMS_PER_PAGE}
+                                handlePrevPage={handlePrevPage}
+                                handleNextPage={handleNextPage}
+                                productCount={Math.min(productCount, searchResults)}
+                            />
+                        </div> :
+                        <div className="alert alert-warning">
+                            <h3 className="text-center"> 🦕 Qualsiasi cosa tu stia cercando... i nostri cacciatori ancora non l'hanno trovata 🦕</h3>
+                        </div>
+                    }
                 </>
             )}
         </div>

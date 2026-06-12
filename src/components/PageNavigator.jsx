@@ -1,6 +1,7 @@
 
 
 function PageNavigator({ currentOffset, MAX_ITEMS_PER_PAGE, handlePrevPage, handleNextPage, productCount }) {
+
     return (
         <div className="d-flex justify-content-center align-items-center gap-3 mt-4">
             <button

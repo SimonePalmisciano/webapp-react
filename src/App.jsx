@@ -1,4 +1,4 @@
-import { ProductProvider } from "./contexts/ProductContext.jsx";
+
 import { BrowserRouter, Route, Routes } from "react-router";
 import HomePage from "./pages/HomePage";
 import ProductDetailPage from "./pages/ProductDetailPage.jsx"
@@ -12,7 +12,6 @@ function App() {
 
   return (
 
-    <ProductProvider>
       <CategoryProvider>
       <BrowserRouter>
         <Routes>
@@ -28,7 +27,6 @@ function App() {
         </Routes>
       </BrowserRouter>
       </CategoryProvider>
-    </ProductProvider>
 
   )
 }
