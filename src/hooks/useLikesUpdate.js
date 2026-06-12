@@ -25,8 +25,7 @@ function useLikesUpdate(reviewSlug){
     };
 
         fetch(`${BASE_API_URL}/products/${productSlug}/reviews/${reviewSlug}`, options)
-        .then(res => res.json())
-        .then(data => console.log(data));
+        .then(res => res.json());
         
         setLikesNumber(likesNumber);
     }

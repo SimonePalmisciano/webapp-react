@@ -8,8 +8,6 @@ function ProductDetailPage() {
     const [product, setProduct] = useState({});
     const [reviews, setReviews] = useState([]);
     const navigate = useNavigate();
-    console.log(product);
-    console.log(reviews);
 
     useEffect(() => {
         fetch(`${BASE_API_URL}/products/${productSlug}`)
@@ -49,7 +47,10 @@ function ProductDetailPage() {
                         <h2>{product.name}</h2>
                         <hr></hr>
                         <p>{product.description}</p>
-                        <div className="text-end">
+                        <div className="d-flex justify-content-between">
+                            <div>
+                                {product.categories?.map(category => <span className="badge bg-jurassik-orange">{category.label}</span>)}
+                            </div>
                             <span className="badge bg-jurassik-orange">Prezzo:  {`${PRICE_VALUE} ${product.price?.toFixed(2)}`}</span>
                         </div>
                     </div>
