@@ -1,10 +1,19 @@
-a{
+@font-face {
+    font-family: 'Prehistoric_Caveman';
+    src: url('../fonts/Prehistoric_Caveman.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+a {
     text-decoration: none;
 }
-.alt-image-text{
-    height:180px;
+
+.alt-image-text {
+    height: 180px;
 }
-:root{
+
+:root {
     --jurassikGreen: #0B2418;
     --jurassikMoss: #1E4620;
     --jurassikOrange: #ba3b00;
@@ -13,60 +22,81 @@ a{
     --jurassikDark: #121212;
     --jurassikDarkSand: #ffe5a9;
 
-                    
+
 }
-.base-font{
+
+.base-font {
     font-family: "Montserrat", "sans-serif";
 }
-body{
+
+body {
     font-family: "Knewave", "sans-serif";
 }
-.logo{
-    max-width:100px;
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: "Prehistoric_Caveman", "sans-serif";
+    line-height: 2;
 }
 
-.text-jurassik-light{
-    color:var(--jurassikSand);
+.logo {
+    max-width: 100px;
 }
-.text-jurassik-dark{
-    color:var(--jurassikDark);
+
+.text-jurassik-light {
+    color: var(--jurassikSand);
 }
-.bg-jurassik-green{
-    background-image:linear-gradient(var(--jurassikGreen), var(--jurassikMoss));
+
+.text-jurassik-dark {
+    color: var(--jurassikDark);
 }
-.bg-jurassik-orange{
+
+.bg-jurassik-green {
+    background-image: linear-gradient(var(--jurassikGreen), var(--jurassikMoss));
+}
+
+.bg-jurassik-orange {
     background-color: var(--jurassikOrange);
 }
-.bg-jurassik-sand{
+
+.bg-jurassik-sand {
     background-color: var(--jurassikSand);
 }
-.bg-jurassik-sand-dark{
+
+.bg-jurassik-sand-dark {
     background-color: var(--jurassikDarkSand);
 }
-.bg-jurassik-dark{
+
+.bg-jurassik-dark {
     background-color: var(--jurassikDark);
 }
-.hero{
-    object-fit:cover;
+
+.hero {
+    object-fit: cover;
 }
 
-.border-jurassik-dark{
-    border-color:var(--jurassikDark) !important;
+.border-jurassik-dark {
+    border-color: var(--jurassikDark) !important;
 }
 
-.product-image{
-    min-height:500px;
-    object-fit:cover;
+.product-image {
+    min-height: 500px;
+    object-fit: cover;
 }
 
-.w-80{
-    width:80%;
+.w-80 {
+    width: 80%;
 }
 
-.product-card{
+.product-card {
     transition: scale 0.2s ease-in, box-shadow 0.2s ease-in;
 }
-.product-card:hover{
-    scale:1.02;
+
+.product-card:hover {
+    scale: 1.02;
     box-shadow: 0px 0px 15px var(--jurassikOrange);
 }
