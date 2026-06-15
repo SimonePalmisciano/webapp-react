@@ -1,39 +1,14 @@
-import { useNavigate, useParams } from "react-router";
-import { useEffect, useState } from "react";
+import { useParams } from "react-router";
+import { PRICE_VALUE } from "../utils/api.js";
 import ReviewCard from "../components/ReviewCard";
-import { BASE_API_URL, PRICE_VALUE } from "../utils/api.js";
+import ReviewForm from "../components/ReviewForm.jsx";
 import VoteStars from "../components/VoteStars.jsx";
+import useSingleProduct from "../hooks/useSingleProduct.js";
 
 function ProductDetailPage() {
     const { productSlug } = useParams();
-    const [product, setProduct] = useState({});
-    const [reviews, setReviews] = useState([]);
-    const navigate = useNavigate();
+    const { product, reviews } = useSingleProduct(productSlug);
 
-    useEffect(() => {
-        fetch(`${BASE_API_URL}/products/${productSlug}`)
-            .then(res => {
-                if (!res.ok) {
-                    navigate("/404");
-                }
-                return res.json()
-            })
-            .then(data => {
-                if (!data) {
-                    navigate("/404");
-                }
-                setProduct(data.result)
-            })
-            .catch((error) => {
-                navigate("/404");
-            });
-
-        fetch(`${BASE_API_URL}/products/${productSlug}/reviews`)
-            .then(res => res.json())
-            .then(data => setReviews(data.result));
-    }, [productSlug, navigate]);
-
-    if (!product) return <p>Loading ...</p>;
 
     let voteSum = 0;
     reviews.forEach(review => {
@@ -55,7 +30,7 @@ function ProductDetailPage() {
                         <h2>{product.name}</h2>
                         <div className="recensioni d-flex gap-1 align-items-center">
                             <div>{voteAverage.toFixed(2) || 0}</div>
-                            <VoteStars stars={stars}/>
+                            <VoteStars stars={stars} />
                             <div className="separator">|</div>
                             <div>({reviews.length}) {reviews.length === 1 ? <span>Recensione</span> : <span>Recensioni</span>}</div>
                         </div>
@@ -66,7 +41,10 @@ function ProductDetailPage() {
                                 {product.categories?.map((category, index) => <span key={index} className="badge bg-jurassik-orange">{category.label}</span>)}
                             </div>
                             <span className="badge bg-jurassik-orange">Prezzo:  {`${PRICE_VALUE} ${product.price?.toFixed(2)}`}</span>
+
                         </div>
+                        <button className="btn btn-dark bg-jurassik-orange mt-5" data-bs-toggle="modal" data-bs-target="#review-modal">Dicci che ne pensi</button>
+                        <ReviewForm product={product} />
                     </div>
                     <h2>Recensioni</h2>
                     {reviews.length === 0 && <p>Nessuna recensione</p>}
