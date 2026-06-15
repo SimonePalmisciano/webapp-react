@@ -15,8 +15,8 @@ const templateReview = {
 
 function ProductDetailPage() {
     const { productSlug } = useParams();
-    const { product, reviews } = useSingleProduct(productSlug);
     const [review, setReview] = useState(templateReview);
+    const { product, reviews } = useSingleProduct(productSlug, review);
 
     let voteSum = 0;
     reviews.forEach(review => {
@@ -58,7 +58,7 @@ function ProductDetailPage() {
                     </div>
                     <h2>Recensioni</h2>
                     {reviews.length === 0 && <p>Nessuna recensione</p>}
-                    <div className="d-flex flex-column row-gap-2 border border-jurassik-dark rounded p-0">
+                    <div className="d-flex flex-column row-gap-2 p-0">
                         {reviews.map(r => (
                             <ReviewCard key={r.slug} review={r} />
                         ))}

@@ -2,7 +2,7 @@ import { useState, useEffect } from "react"
 import { BASE_API_URL } from "../utils/api.js";
 import { useNavigate } from "react-router";
 
-function useSingleProduct(productSlug) {
+function useSingleProduct(productSlug, review) {
     const [product, setProduct] = useState({});
     const [reviews, setReviews] = useState([]);
     const navigate = useNavigate();
@@ -28,7 +28,7 @@ function useSingleProduct(productSlug) {
         fetch(`${BASE_API_URL}/products/${productSlug}/reviews`)
             .then(res => res.json())
             .then(data => setReviews(data.result));
-    }, [productSlug, navigate]);
+    }, [productSlug, navigate, review]);
 
     return {product,reviews};
 }

@@ -1,3 +1,4 @@
+import { useLocation, useNavigate } from "react-router";
 import { BASE_API_URL } from "../utils/api";
 import VoteInput from "./voteInput";
 import { Modal } from "bootstrap";
@@ -8,6 +9,8 @@ import { useRef } from "react";
 function ReviewForm({ product, review, setReview, templateReview }) {
     
     const modal = useRef(null);
+    const navigate = useNavigate();
+    const location = useLocation();
 
     const handleChange = (event) => {
         const inputName = event.target?.name;
@@ -61,6 +64,7 @@ function ReviewForm({ product, review, setReview, templateReview }) {
                     // Lascia che sia Bootstrap a rimuovere il backdrop: rimuoverlo a mano
                     // desincronizza lo stato interno e rompe la chiusura successiva.
                     toggleableModal?.hide();
+                    navigate(location,{replace:true});
                 }
             }
             )

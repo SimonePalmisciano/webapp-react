@@ -16,6 +16,7 @@ function VoteInput({review, onChange}) {
                     onMouseLeave={() => setHoverRating(0)}>
                         
                         <input
+                            required
                             type="radio"
                             name="vote"
                             className="bone-input"
