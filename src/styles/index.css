@@ -31,7 +31,24 @@ a {
 
 body {
     font-family: "Montserrat", "sans-serif";
-    cursor: url(/icona-dinosauro.png), auto;
+}
+
+*,
+*::before,
+*::after {
+    cursor: url(/icona-dinosauro.png), pointer;
+}
+
+a {
+    cursor: url(/icona-dinosauro-pointer.png), pointer;
+}
+
+button.btn {
+    cursor: url(/icona-dinosauro-pointer.png), pointer;
+}
+
+.btn {
+    cursor: url(/icona-dinosauro-pointer.png), pointer;
 }
 
 h1,
@@ -42,29 +59,32 @@ h5,
 h6 {
     font-family: "Thertole", "sans-serif";
     line-height: 1;
-    
+
 }
 
-h1{
+h1 {
     font-size: 10rem !important;
     line-height: normal !important;
 }
-h2{
+
+h2 {
     font-size: 4rem !important;
 }
-h3{
+
+h3 {
     font-size: 2.5rem !important;
 }
+
 h4,
-h5{
+h5 {
     font-size: 2rem !important;
 }
 
-.h1-5{
+.h1-5 {
     font-size: 6rem !important;
 }
 
-.subtitle{
+.subtitle {
     font-size: 2rem;
 }
 
@@ -141,11 +161,11 @@ h5{
     font-size: 0.9rem;
 }
 
-.details-image{
-    object-fit:cover;
-    min-height:500px;
+.details-image {
+    object-fit: cover;
+    min-height: 500px;
 }
 
-.main-container{
-    min-height:20vh;
+.main-container {
+    min-height: 20vh;
 }
