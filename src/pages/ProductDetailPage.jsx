@@ -55,7 +55,9 @@ function ProductDetailPage() {
                         <h2>{product.name}</h2>
                         <div className="recensioni d-flex gap-1 align-items-center">
                             <div>{voteAverage.toFixed(2) || 0}</div>
-                            <VoteStars stars={stars}/>
+                            <div className="vote-stars d-flex">
+                                <VoteStars stars={stars} />
+                            </div>
                             <div className="separator">|</div>
                             <div>({reviews.length}) {reviews.length === 1 ? <span>Recensione</span> : <span>Recensioni</span>}</div>
                         </div>
