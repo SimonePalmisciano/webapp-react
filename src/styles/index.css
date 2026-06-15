@@ -166,11 +166,18 @@ h5 {
     font-size: 0.9rem;
 }
 
-.details-image {
-    object-fit: cover;
-    min-height: 500px;
+
+.details-image{
+    object-fit:cover;
+    width:100%;
+    height:100%;
 }
 
-.main-container {
-    min-height: 20vh;
+.main-container{
+    min-height:20vh;
+}
+
+.bone-input{
+    display:none;
+    opacity: 0;
 }
