@@ -9,12 +9,12 @@ function ReviewCard({ review }) {
         <div className="card p-0 border-0 shadow-sm rounded-4 overflow-hidden" data-bs-theme="dark">
             <div className="card-body d-flex flex-column gap-3 p-4">
 
-                <div className="d-flex justify-content-between align-items-start">
+                <div className="d-flex justify-content-between align-items-start flex-wrap">
                     <div>
                         <h5 className="mb-1 fw-bold">{review.title}</h5>
                     </div>
 
-                    <div className="px-3 py-2 rounded-pill border">
+                    <div className="px-3 py-2 rounded-pill border d-flex">
                         <VoteStars stars={review.vote}/>
                     </div>
                 </div>
