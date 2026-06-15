@@ -33,10 +33,15 @@ body {
     font-family: "Montserrat", "sans-serif";
 }
 
+
 *,
 *::before,
 *::after {
     cursor: url(/icona-dinosauro.png), pointer;
+}
+
+*:active {
+    cursor: url(/icona-dinosauro-pointer.png), auto;
 }
 
 a {
