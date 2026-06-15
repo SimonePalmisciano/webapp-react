@@ -1,18 +1,12 @@
 import { BASE_API_URL } from "../utils/api";
 import VoteInput from "./voteInput";
-import { useState } from "react";
 import { Modal } from "bootstrap";
 import { useRef } from "react";
 
-const templateReview = {
-    "title": "",
-    "description": "",
-    "vote": 0,
-    "likes": 0
-}
 
-function ReviewForm({ product }) {
-    const [review, setReview] = useState(templateReview);
+
+function ReviewForm({ product, review, setReview, templateReview }) {
+    
     const modal = useRef(null);
 
     const handleChange = (event) => {
@@ -51,27 +45,29 @@ function ReviewForm({ product }) {
                     console.log("Errore nella creazione della recensione");
                 }
                 else {
-                    const allModals = document.querySelectorAll(".modal-backdrop");
-                    const toggleableModal = Modal.getInstance(modal.current);
-                    // Resetta la form SOLO dopo che Bootstrap ha completamente rimosso il modale e il suo backdrop. 
+                    const toggleableModal = Modal.getOrCreateInstance(modal.current);
+                    // Resetta la form SOLO dopo che Bootstrap ha completamente rimosso il modale e il suo backdrop.
                     // Resettare lo state prima fa si che il backdrop rimanga orfano e quindi resti visibile
                     modal.current.addEventListener(
                         "hidden.bs.modal",
                         () => {
                             console.log("Modal è chiuso");
-                            setReview(templateReview);}
+                            setReview(templateReview);}, { once: true }
                     );
-                    toggleableModal.hide();
-                    allModals.forEach(modalBackdrop => {
-                        modalBackdrop.remove();
-                    })
+                    // Sposta il focus fuori dal modale PRIMA di nasconderlo, altrimenti
+                    // il focus resta intrappolato sul pulsante (ormai aria-hidden) e blocca
+                    // la navigazione da tastiera.
+                    document.activeElement?.blur();
+                    // Lascia che sia Bootstrap a rimuovere il backdrop: rimuoverlo a mano
+                    // desincronizza lo stato interno e rompe la chiusura successiva.
+                    toggleableModal?.hide();
                 }
             }
             )
     }
 
     return (
-        <div className="modal fade" id="review-modal" ref={modal}>
+        <div className="modal" id="review-modal" ref={modal}>
             <div className="modal-dialog">
                 <div className="modal-content">
                     {product && <form className="d-flex flex-column form-control row-gap-2" data-bs-theme="dark" onSubmit={handleSubmit}>

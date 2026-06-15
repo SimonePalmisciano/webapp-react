@@ -1,14 +1,22 @@
 import { useParams } from "react-router";
+import { useState } from "react";
 import { PRICE_VALUE } from "../utils/api.js";
 import ReviewCard from "../components/ReviewCard";
 import ReviewForm from "../components/ReviewForm.jsx";
 import VoteStars from "../components/VoteStars.jsx";
 import useSingleProduct from "../hooks/useSingleProduct.js";
 
+const templateReview = {
+    "title": "",
+    "description": "",
+    "vote": 0,
+    "likes": 0
+}
+
 function ProductDetailPage() {
     const { productSlug } = useParams();
     const { product, reviews } = useSingleProduct(productSlug);
-
+    const [review, setReview] = useState(templateReview);
 
     let voteSum = 0;
     reviews.forEach(review => {
@@ -46,7 +54,7 @@ function ProductDetailPage() {
 
                         </div>
                         <button className="btn btn-dark bg-jurassik-orange mt-5" data-bs-toggle="modal" data-bs-target="#review-modal">Dicci che ne pensi</button>
-                        <ReviewForm product={product} />
+                        <ReviewForm product={product} review={review} setReview={setReview} templateReview={templateReview}/>
                     </div>
                     <h2>Recensioni</h2>
                     {reviews.length === 0 && <p>Nessuna recensione</p>}
