@@ -7,6 +7,7 @@ import LayoutPagina from "./layouts/LayoutPagina.jsx";
 import AboutUs from "./pages/AboutUs.jsx";
 import ProductPage from "./pages/ProductPage.jsx";
 import { CategoryProvider } from "./contexts/CategoryContext.jsx";
+import ScrollToTop from "./components/ScrollToTop.js";
 
 function App() {
 
@@ -15,6 +16,7 @@ function App() {
 
       <CategoryProvider>
       <BrowserRouter>
+        <ScrollToTop/>
         <Routes>
 
           <Route Component={LayoutPagina}>
