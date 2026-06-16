@@ -89,10 +89,10 @@ function ProductPage() {
             <div className="mb-4 pb-4 pt-2 sticky-top bg-jurassik-orange rounded px-2">
                 <SearchBar query={searchTerms} setQuery={setSearchTerms} setCurrentOffset={setCurrentOffset} />
                 <p className="mb-2 fw-semibold">Filtra per categoria</p>
-                <div className="d-flex flex-wrap gap-3">
-                    <label className="form-check-label">
+                <div className="d-flex flex-wrap gap-3 category-filter-group">
+                    <label className="category-pill">
                         <input
-                            className="form-check-input me-2"
+                            className="category-pill-input"
                             type="radio"
                             name="category"
                             value=""
@@ -103,13 +103,13 @@ function ProductPage() {
                             }
                             }
                         />
-                        Tutte
+                        <span className="category-pill-chip">Tutte</span>
                     </label>
 
                     {categories.map((category) => (
-                        <label key={category.slug} className="form-check-label">
+                        <label key={category.slug} className="category-pill">
                             <input
-                                className="form-check-input me-2"
+                                className="category-pill-input"
                                 type="radio"
                                 name="category"
                                 value={category.label}
@@ -120,7 +120,7 @@ function ProductPage() {
                                 }
                                 }
                             />
-                            {category.label}
+                        <span className="category-pill-chip">{category.label}</span>
                         </label>
                     ))}
                 </div>
