@@ -1,4 +1,4 @@
-.newsletter-overlay {
+.newsletterOverlay {
     position: fixed;
     top: 0;
     left: 0;
@@ -12,70 +12,91 @@
     padding: 20px;
 }
 
-.newsletter-modal {
+.newsletterModal {
     width: 100%;
-    max-width: 480px;
+    max-width: 500px;
     background: #fff8f0;
     border-radius: 20px;
     padding: 32px 24px;
-    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.25);
     text-align: center;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.25);
     border: 3px solid #f2b66d;
+    animation: popup 0.3s ease;
 }
 
-.newsletter-badge {
+.newsletterBadge {
     display: inline-block;
     background: #ffb703;
     color: #5a2d0c;
-    font-weight: bold;
+    font-weight: 700;
     padding: 8px 14px;
     border-radius: 999px;
     margin-bottom: 16px;
     font-size: 14px;
 }
 
-.newsletter-modal h2 {
-    margin-bottom: 12px;
-    color: #7a3e12;
+.newsletterTitle {
     font-size: 28px;
+    color: #7a3e12;
+    margin: 0 0 12px 0;
 }
 
-.newsletter-modal p {
-    color: #4b3a2f;
+.newsletterText {
     font-size: 16px;
-    line-height: 1.5;
+    line-height: 1.6;
+    color: #4b3a2f;
     margin-bottom: 24px;
 }
 
-.newsletter-buttons {
+.newsletterButtons {
     display: flex;
     justify-content: center;
     gap: 12px;
     flex-wrap: wrap;
 }
 
-.btn-primary,
-.btn-secondary {
+.btnPrimary {
+    background: #d62828;
+    color: white;
     border: none;
     border-radius: 12px;
-    padding: 12px 18px;
+    padding: 12px 20px;
     font-size: 15px;
-    font-weight: bold;
+    font-weight: 700;
     cursor: pointer;
     transition: transform 0.2s ease, opacity 0.2s ease;
 }
 
-.btn-primary:hover,
-.btn-secondary:hover {
+.btnPrimary:hover {
     transform: translateY(-2px);
+    opacity: 0.95;
 }
 
-.btn-primary {
-    background: #d62828;
-    color: white;
-}
-
-.btn-secondary {
+.btnSecondary {
     background: #ece7e1;
     color: #4b3a2f;
+    border: none;
+    border-radius: 12px;
+    padding: 12px 20px;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.btnSecondary:hover {
+    transform: translateY(-2px);
+    opacity: 0.95;
+}
+
+@keyframes popup {
+    from {
+        opacity: 0;
+        transform: scale(0.92);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
 }

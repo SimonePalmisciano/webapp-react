@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useVisit } from "../contexts/VisitContext.jsx";
-import "./NewsletterBanner.module.css";
+import style from "./NewsletterBanner.module.css";
 
 function NewsletterBanner() {
     const { isFirstVisit, newsletterHandled, markNewsletterHandled } = useVisit();
@@ -25,23 +25,27 @@ function NewsletterBanner() {
     if (!shouldShow) return null;
 
     return (
-        <div className="newsletter-overlay">
-            <div className="newsletter-modal">
-                <span className="newsletter-badge">Benvenuto 🦕</span>
-
-                <h2>Unisciti alla nostra newsletter</h2>
-
-                <p>
+        <div className={style.newsletterOverlay}>
+            <div className={style.newsletterModal}>
+                <span className={style.newsletterBadge}>Benvenuto 🍔</span>
+                <h2 className={style.newsletterTitle}>
+                    Iscriviti alla nostra newsletter
+                </h2>
+                <p className={style.newsletterText}>
                     Ricevi offerte speciali, novità sui nostri hamburger e promozioni
-                    riservate ai clienti più golosi.
+                    dedicate ai nostri clienti.
                 </p>
-
-                <div className="newsletter-buttons">
-                    <button className="btn-primary" onClick={markNewsletterHandled}>
+                <div className={style.newsletterButtons}>
+                    <button
+                        className={style.btnPrimary}
+                        onClick={markNewsletterHandled}
+                    >
                         Iscrivimi
                     </button>
-
-                    <button className="btn-secondary" onClick={markNewsletterHandled}>
+                    <button
+                        className={style.btnSecondary}
+                        onClick={markNewsletterHandled}
+                    >
                         No grazie
                     </button>
                 </div>
@@ -49,5 +53,4 @@ function NewsletterBanner() {
         </div>
     );
 }
-
 export default NewsletterBanner;
