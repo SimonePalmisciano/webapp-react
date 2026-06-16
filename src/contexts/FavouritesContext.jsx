@@ -49,10 +49,6 @@ function FavouritesProvider({ children }) {
     );
 }
 
-export function useFavourites() {
-    return useContext(FavouritesContext);
-}
-
 export {
     FavouritesContext,
     FavouritesProvider

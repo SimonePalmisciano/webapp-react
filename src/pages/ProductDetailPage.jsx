@@ -5,7 +5,7 @@ import ReviewCard from "../components/ReviewCard";
 import ReviewForm from "../components/ReviewForm.jsx";
 import VoteStars from "../components/VoteStars.jsx";
 import useSingleProduct from "../hooks/useSingleProduct.js";
-import { useFavourites } from "../contexts/FavouritesContext.jsx";
+import useFavourites from "../hooks/useFavourites.js";
 
 const templateReview = {
     "title": "",

@@ -1,6 +1,6 @@
 import { Link } from "react-router";
 import { PRICE_VALUE } from "../../utils/api.js";
-import { useFavourites } from "../../contexts/FavouritesContext.jsx";
+import useFavourites from "../../hooks/useFavourites.js";
 
 function ProductCard({ product }) {
     const { name, price, categories, geological_era, image, slug } = product;

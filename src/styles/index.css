@@ -295,7 +295,12 @@ h5 {
     user-select: none;
     transition: background-color 0.2s ease, color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
 }
-
+.offcanvas-container{
+    position: fixed;
+    bottom: 1rem;
+    left: 1rem;
+    z-index:1030;
+}
 .category-pill:hover .category-pill-chip {
     transform: translateY(-1px);
 }
