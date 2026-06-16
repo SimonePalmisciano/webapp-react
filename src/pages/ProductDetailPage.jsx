@@ -11,7 +11,8 @@ const templateReview = {
     "title": "",
     "description": "",
     "vote": 0,
-    "likes": 0
+    "likes": 0,
+    "review-image": ""
 }
 
 function ProductDetailPage() {

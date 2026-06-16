@@ -20,7 +20,10 @@ function ReviewForm({ product, review, setReview, templateReview }) {
             inputValue = Number(inputValue);
             console.log(inputValue);
         }
-
+        if (inputName === "review-image"){
+            const file = event.target?.files["0"];
+            inputValue = file;
+        }
         const newReview = {
             ...review,
             [inputName]: inputValue
@@ -31,17 +34,22 @@ function ReviewForm({ product, review, setReview, templateReview }) {
 
     const handleSubmit = (event) => {
         event.preventDefault();
+        
+        const formData = new FormData();
 
+        formData.append("vote", review.vote);
+        formData.append("title", review.title);
+        formData.append("description", review.description);
+        formData.append("likes", review.likes);
+        if(review["review-image"]){
+            formData.append("review-image", review["review-image"])
+        }
 
         const options = {
             method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(review)
+            body: formData
         };
 
-        console.log(JSON.stringify(review));
         fetch(`${BASE_API_URL}/products/${product.slug}/reviews`, options)
             .then(response => {
                 if (!response.ok) {
@@ -104,6 +112,7 @@ function ReviewForm({ product, review, setReview, templateReview }) {
                         ></textarea>
                         <p className="form-label">Che voto daresti?</p>
                         <VoteInput review={review} onChange={handleChange} />
+                        <input name="review-image" type="file" onChange={handleChange}></input>
                         <button className="btn btn-dark bg-jurassik-orange" type="submit">Invia Recensione</button>
                     </form>}
                 </div>

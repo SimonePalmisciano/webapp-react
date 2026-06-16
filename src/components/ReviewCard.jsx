@@ -16,7 +16,7 @@ function ReviewCard({ review }) {
                     </div>
 
                     <div className="px-3 py-2 rounded-pill border d-flex">
-                        <VoteStars stars={review.vote}/>
+                        <VoteStars stars={review.vote} />
                     </div>
                 </div>
 
@@ -27,7 +27,12 @@ function ReviewCard({ review }) {
                         {review.description}
                     </p>
                 </div>
-
+                <div className="border-top border-secondary opacity-50"></div>
+                <div className="d-flex justify-content-center">
+                    <div className="review-image rounded">
+                        <img src={review.image} className="img-fluid rounded border border-jurassik-dark"></img>
+                    </div>
+                </div>
                 <div className="d-flex justify-content-end pt-2">
                     <button
                         type="button"

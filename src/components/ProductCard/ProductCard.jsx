@@ -22,7 +22,7 @@ function ProductCard({ product }) {
                                 </span>
                             )
                         })}
-                        <button
+                        <button className="btn btn-dark bg-jurassik-orange"
                             onClick={(event) => {
                                 event.preventDefault();
                                 event.stopPropagation();
@@ -31,7 +31,7 @@ function ProductCard({ product }) {
                         >
                             {favourite ? "❤️" : "🤍"}
                         </button>
-                        <strong className="align-self-end">{`${PRICE_VALUE} ${price.toFixed(2)}`}</strong>
+                        <strong >{`${PRICE_VALUE} ${price.toFixed(2)}`}</strong>
                     </div>
                 </div>
             </div>

@@ -237,3 +237,6 @@ h5 {
 .category-pill-input:active + .category-pill-chip{
     transform: scale(0.98);
 }
+.review-image{
+    width:30%;
+}
