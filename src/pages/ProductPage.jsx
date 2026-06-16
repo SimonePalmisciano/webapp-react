@@ -124,6 +124,7 @@ function ProductPage() {
                         </label>
                     ))}
                 </div>
+                <h6 className="base-font text-center mt-3">Ci sono ben <strong>{(searchTerms !== "" || selectedCategory !== "any") ? products.length : productCount}</strong> carcasse di dinosauro pronte a sfamarti!</h6>
             </div>
 
             {!error ?
