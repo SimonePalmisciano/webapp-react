@@ -190,6 +190,8 @@ h5 {
     position: fixed;
     right: 1rem;
     bottom: 1rem;
+    width: 64px;
+    height: 64px;
     z-index: 1040;
 }
 
@@ -204,6 +206,40 @@ h5 {
 .agent-chat-messages{
     height: 260px;
     overflow-y: auto;
+}
+
+.agent-chat-toggle {
+    position: fixed;
+    overflow: hidden;
+}
+
+.egg-icon {
+    position: absolute;
+    font-size: 1.9rem;
+    line-height: 1;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.egg-icon-default {
+    opacity: 1;
+    transform: scale(1);
+}
+
+.egg-icon-hover {
+    opacity: 0;
+    transform: scale(0.85);
+}
+
+.agent-chat-toggle:hover .egg-icon-default,
+.agent-chat-toggle:focus-visible .egg-icon-default {
+    opacity: 0;
+    transform: scale(0.85);
+}
+
+.agent-chat-toggle:hover .egg-icon-hover,
+.agent-chat-toggle:focus-visible .egg-icon-hover {
+    opacity: 1;
+    transform: scale(1);
 }
 
 /*MOBILE*/

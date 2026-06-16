@@ -68,10 +68,13 @@ function AgentChatWidget() {
         <>
             <button
                 type="button"
-                className="btn btn-warning rounded-pill shadow agent-chat-fab"
+                className="agent-chat-fab btn btn-warning rounded-circle shadow d-flex align-items-center justify-content-center agent-chat-toggle"
                 onClick={() => setOpen((currentValue) => !currentValue)}
+                aria-label={open ? "Chiudi chat" : "Apri chat con Claudio"}
+                title={open ? "Chiudi chat" : "Hai fame? Chiedi a Claudio!"}
             >
-                {open ? "Chiudi chat" : "Chiedi a Claudio"}
+                <i className="bi bi-egg egg-icon egg-icon-default" aria-hidden="true"></i>
+                <i className="bi bi-egg-fill egg-icon egg-icon-hover" aria-hidden="true"></i>
             </button>
 
             {open && (
@@ -89,12 +92,12 @@ function AgentChatWidget() {
                                     key={index}
                                     className={
                                         "mb-2 p-2 rounded-3 " +
-                                    (message.role === "user"
-                                        ? "bg-jurassik-orange text-jurassik-light"
-                                        : "bg-light border")
+                                        (message.role === "user"
+                                            ? "bg-jurassik-orange text-jurassik-light"
+                                            : "bg-light border")
                                     }
-                                    
-                                    >
+
+                                >
                                     <strong>
                                         {message.role === "user" ? "Tu" : "Claudio"}:
                                     </strong>{" "}
