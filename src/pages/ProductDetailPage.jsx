@@ -5,6 +5,7 @@ import ReviewCard from "../components/ReviewCard";
 import ReviewForm from "../components/ReviewForm.jsx";
 import VoteStars from "../components/VoteStars.jsx";
 import useSingleProduct from "../hooks/useSingleProduct.js";
+import { useFavourites } from "../contexts/FavouritesContext.jsx";
 
 const templateReview = {
     "title": "",
@@ -17,6 +18,9 @@ function ProductDetailPage() {
     const { productSlug } = useParams();
     const [review, setReview] = useState(templateReview);
     const { product, reviews } = useSingleProduct(productSlug, review);
+
+    const { isFavourite, toggleFavourite } = useFavourites();
+    const favourite = isFavourite(product.slug);
 
     let voteSum = 0;
     reviews.forEach(review => {
@@ -53,8 +57,18 @@ function ProductDetailPage() {
                             <span className="badge bg-jurassik-orange">Prezzo:  {`${PRICE_VALUE} ${product.price?.toFixed(2)}`}</span>
 
                         </div>
-                        <button className="btn btn-dark bg-jurassik-orange mt-5" data-bs-toggle="modal" data-bs-target="#review-modal">Dicci che ne pensi</button>
-                        <ReviewForm product={product} review={review} setReview={setReview} templateReview={templateReview}/>
+                        <div className="d-flex justify-content-between">
+                            <button className="btn btn-dark bg-jurassik-orange mt-5" data-bs-toggle="modal" data-bs-target="#review-modal">Dicci che ne pensi</button>
+                            <ReviewForm product={product} review={review} setReview={setReview} templateReview={templateReview} />
+                            <button className="btn btn-dark bg-jurassik-orange mt-5"
+                                onClick={(event) => {
+                                    event.stopPropagation();
+                                    toggleFavourite(product);
+                                }}
+                            >
+                                {favourite ? "❤️" : "🤍"}
+                            </button>
+                        </div>
                     </div>
                     <h2>Recensioni</h2>
                     {reviews.length === 0 && <p>Nessuna recensione</p>}

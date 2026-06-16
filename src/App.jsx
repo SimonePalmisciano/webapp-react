@@ -10,31 +10,34 @@ import { CategoryProvider } from "./contexts/CategoryContext.jsx";
 import ScrollToTop from "./components/ScrollToTop.js";
 import { VisitProvider } from "./contexts/VisitContext.jsx";
 import AgentChatWidget from "./components/AgentChatWidget.jsx"
+import { FavouritesProvider } from "./contexts/FavouritesContext.jsx";
+
 
 function App() {
 
   return (
 
     <VisitProvider>
-      <CategoryProvider>
-        <BrowserRouter>
-          <ScrollToTop />
-          <Routes>
+      <FavouritesProvider>
+        <CategoryProvider>
+          <BrowserRouter>
+            <ScrollToTop />
+            <Routes>
 
-            <Route Component={LayoutPagina}>
-              <Route index Component={HomePage} />
-              <Route path="products" Component={ProductPage} />
-              <Route path="products/:productSlug" Component={ProductDetailPage} />
-              <Route path="about-us" Component={AboutUs} />
-            </Route>
+              <Route Component={LayoutPagina}>
+                <Route index Component={HomePage} />
+                <Route path="products" Component={ProductPage} />
+                <Route path="products/:productSlug" Component={ProductDetailPage} />
+                <Route path="about-us" Component={AboutUs} />
+              </Route>
 
-            <Route path="*" Component={NotFound} />
-          </Routes>
-          <AgentChatWidget/>
-        </BrowserRouter>
-      </CategoryProvider>
+              <Route path="*" Component={NotFound} />
+            </Routes>
+            <AgentChatWidget/>
+          </BrowserRouter>
+        </CategoryProvider>
+      </FavouritesProvider>
     </VisitProvider>
-
 
   )
 }
