@@ -185,3 +185,55 @@ h5 {
     margin: 0;
     pointer-events: none;
 }
+
+.category-filter-group{
+    align-items: center;
+}
+
+.category-pill{
+    position: relative;
+    display: inline-block;
+    margin: 0;
+}
+
+.category-pill-input{
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    margin: 0;
+}
+
+.category-pill-chip{
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.5rem 1rem;
+    border: 2px solid var(--jurassikSand);
+    border-radius: 1000px;
+    background-color: rgba(255, 255, 255, 0.08);
+    color: var(--jurassikSand);
+    font-weight: 600;
+    line-height: 1;
+    user-select: none;
+    transition: background-color 0.2s ease, color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.category-pill:hover .category-pill-chip{
+    transform: translateY(-1px);
+}
+
+.category-pill-input:checked + .category-pill-chip{
+    background-color: var(--jurassikSand);
+    color: var(--jurassikDark);
+    border-color: var(--jurassikSand);
+    box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.1);
+}
+
+.category-pill-input:focus-visible + .category-pill-chip{
+    outline: 2px solid var(--jurassikYellow);
+    outline-offset: 2px;
+}
+
+.category-pill-input:active + .category-pill-chip{
+    transform: scale(0.98);
+}
