@@ -9,6 +9,7 @@ import ProductPage from "./pages/ProductPage.jsx";
 import { CategoryProvider } from "./contexts/CategoryContext.jsx";
 import ScrollToTop from "./components/ScrollToTop.js";
 import { VisitProvider } from "./contexts/VisitContext.jsx";
+import AgentChatWidget from "./components/AgentChatWidget.jsx"
 
 function App() {
 
@@ -29,6 +30,7 @@ function App() {
 
             <Route path="*" Component={NotFound} />
           </Routes>
+          <AgentChatWidget/>
         </BrowserRouter>
       </CategoryProvider>
     </VisitProvider>
