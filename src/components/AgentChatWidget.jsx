@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { BASE_API_URL } from "../utils/api";
+import AgentChatCard from "./AgentChatCard";
 
 
 
@@ -88,21 +89,14 @@ function AgentChatWidget() {
                             </p>
                         ) : (
                             messages.map((message, index) => (
-                                <div
-                                    key={index}
-                                    className={
+                                    <AgentChatCard key={index} children={message.text} role={message.role} className={
                                         "mb-2 p-2 rounded-3 " +
                                         (message.role === "user"
                                             ? "bg-jurassik-orange text-jurassik-light"
                                             : "bg-light border")
                                     }
+                                    />
 
-                                >
-                                    <strong>
-                                        {message.role === "user" ? "Tu" : "Claudio"}:
-                                    </strong>{" "}
-                                    <span>{message.text}</span>
-                                </div>
                             ))
                         )}
                     </div>
