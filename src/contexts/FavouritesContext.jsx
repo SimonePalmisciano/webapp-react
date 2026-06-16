@@ -1,29 +1,34 @@
 import { createContext, useContext, useState } from "react";
 
-const FavouritesContext = createContext(null);
+const FavouritesContext = createContext();
 
 function FavouritesProvider({ children }) {
     const [favourites, setFavourites] = useState([]);
 
     const addToFavourites = (product) => {
-        const alreadyExists = favourites.some((item) => item.id === product.id);
+        const alreadyExists = favourites.some(
+            (item) => item.slug === product.slug
+        );
+
         if (!alreadyExists) {
             setFavourites([...favourites, product]);
         }
     };
 
-    const removeFromFavourites = (productId) => {
-        const updatedFavourites = favourites.filter((item) => item.id !== productId);
+    const removeFromFavourites = (productSlug) => {
+        const updatedFavourites = favourites.filter(
+            (item) => item.slug !== productSlug
+        );
         setFavourites(updatedFavourites);
     };
 
-    const isFavourite = (productId) => {
-        return favourites.some((item) => item.id === productId);
+    const isFavourite = (productSlug) => {
+        return favourites.some((item) => item.slug === productSlug);
     };
 
     const toggleFavourite = (product) => {
-        if (isFavourite(product.id)) {
-            removeFromFavourites(product.id);
+        if (isFavourite(product.slug)) {
+            removeFromFavourites(product.slug);
         } else {
             addToFavourites(product);
         }

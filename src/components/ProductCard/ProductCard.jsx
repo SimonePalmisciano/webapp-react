@@ -1,8 +1,12 @@
 import { Link } from "react-router";
 import { PRICE_VALUE } from "../../utils/api.js";
+import { useFavourites } from "../../contexts/FavouritesContext.jsx";
 
 function ProductCard({ product }) {
     const { name, price, categories, geological_era, image, slug } = product;
+    const {isFavourite, toggleFavourite} = useFavourites();
+    const favourite = isFavourite(product.slug);
+
     return (
         <Link to={`/products/${slug}`} preventScrollReset>
             <div className="card h-100 product-card" data-bs-theme="dark">
@@ -18,6 +22,15 @@ function ProductCard({ product }) {
                                 </span>
                             )
                         })}
+                        <button
+                            onClick={(event) => {
+                                event.preventDefault();
+                                event.stopPropagation();
+                                toggleFavourite(product);
+                            }}
+                        >
+                            {favourite ? "❤️" : "🤍"}
+                        </button>
                         <strong className="align-self-end">{`${PRICE_VALUE} ${price.toFixed(2)}`}</strong>
                     </div>
                 </div>
