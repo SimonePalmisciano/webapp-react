@@ -13,7 +13,7 @@ function OffCanvas() {
 
             <div className="offcanvas offcanvas-end" tabIndex="-1" id="offCanvasPreferiti" aria-labelledby="preferiti" data-bs-theme="dark">
                 <div className="offcanvas-header">
-                    <h5 className="offcanvas-title" id="preferiti">Offcanvas</h5>
+                    <h5 className="offcanvas-title" id="preferiti">Preferiti</h5>
                     <button type="button" className="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                 </div>
                 <div className="offcanvas-body">
