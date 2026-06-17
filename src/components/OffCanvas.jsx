@@ -7,7 +7,7 @@ function OffCanvas() {
 
     return (
         <div className="d-flex justify-content-end offcanvas-container">
-            <button className="btn btn-dark bg-jurassik-orange boder border-jurassik-dark " type="button" data-bs-toggle="offcanvas" data-bs-target="#offCanvasPreferiti" aria-controls="offCanvasPreferiti">
+            <button className="btn btn-warning boder border-jurassik-dark " type="button" data-bs-toggle="offcanvas" data-bs-target="#offCanvasPreferiti" aria-controls="offCanvasPreferiti">
                 Preferiti
             </button>
 
