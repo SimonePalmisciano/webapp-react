@@ -14,7 +14,7 @@ function useLikesUpdate(reviewSlug){
         .then(data => setLikesNumber(data?.result?.likes))
         .catch(error => console.error(error));
     }, [likesNumber,productSlug,reviewSlug,setLikesNumber])
-    console.log(likesNumber);
+
     const updateLikes = (likesNumber) => {
         const options = {
         method:"PATCH",
