@@ -24,9 +24,11 @@ function ProductDetailPage() {
     const favourite = isFavourite(product.slug);
 
     let voteSum = 0;
-    reviews.forEach(review => {
-        voteSum += review.vote;
-    })
+    if(reviews){
+        reviews.forEach(review => {
+            voteSum += review.vote;
+        })
+    }
 
     let voteAverage = voteSum / reviews.length;
 
@@ -72,12 +74,13 @@ function ProductDetailPage() {
                         </div>
                     </div>
                     <h2>Recensioni</h2>
-                    {reviews.length === 0 && <p>Nessuna recensione</p>}
-                    <div className="d-flex flex-column row-gap-2 p-0">
-                        {reviews.map(r => (
+                    {reviews && reviews.length === 0 && <p>Nessuna recensione</p>}
+                    {reviews.length !== 0 && <div className="d-flex flex-column row-gap-2 p-0">
+                        {reviews?.map(r => (
                             <ReviewCard key={r.slug} review={r} />
                         ))}
                     </div>
+                    }
                 </div>
             </div>
 

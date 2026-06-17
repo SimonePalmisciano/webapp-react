@@ -51,7 +51,7 @@ function AgentChatWidget() {
                 { role: "assistant", text: answerText }
             ]);
         } catch (error) {
-            setError("Non riesco a contattare Claudio in questo momento.");
+            setError("Non riesco a contattare Rexy in questo momento.");
         } finally {
             setLoading(false);
         }
@@ -71,8 +71,8 @@ function AgentChatWidget() {
                 type="button"
                 className="agent-chat-fab btn btn-warning rounded-circle shadow d-flex align-items-center justify-content-center agent-chat-toggle"
                 onClick={() => setOpen((currentValue) => !currentValue)}
-                aria-label={open ? "Chiudi chat" : "Apri chat con Claudio"}
-                title={open ? "Chiudi chat" : "Hai fame? Chiedi a Claudio!"}
+                aria-label={open ? "Chiudi chat" : "Apri chat con Rexy"}
+                title={open ? "Chiudi chat" : "Hai fame? Chiedi a Rexy!"}
             >
                 <i className="bi bi-egg egg-icon egg-icon-default" aria-hidden="true"></i>
                 <i className="bi bi-egg-fill egg-icon egg-icon-hover" aria-hidden="true"></i>
@@ -80,7 +80,7 @@ function AgentChatWidget() {
 
             {open && (
                 <div className="agent-chat-panel border border-dark rounded-4 bg-jurassik-sand p-3 shadow-lg">
-                    <h5 className="mb-3">Assistente Personale</h5>
+                    <h5 className="mb-3">Rexy, il tuo assistente personale</h5>
 
                     <div className="agent-chat-messages border rounded-3 p-2 mb-3 bg-white">
                         {messages.length === 0 ? (

@@ -11,10 +11,10 @@ function useLikesUpdate(reviewSlug){
     useEffect(() => {
         fetch(`${BASE_API_URL}/products/${productSlug}/reviews/${reviewSlug}`)
         .then(response => response.json())
-        .then(data => setLikesNumber(data.result.likes))
+        .then(data => setLikesNumber(data?.result?.likes))
         .catch(error => console.error(error));
     }, [likesNumber,productSlug,reviewSlug,setLikesNumber])
-
+    console.log(likesNumber);
     const updateLikes = (likesNumber) => {
         const options = {
         method:"PATCH",

@@ -3,7 +3,7 @@ import VoteStars from "./VoteStars";
 
 function ReviewCard({ review }) {
 
-    const { likesNumber, updateLikes } = useLikesUpdate(review.slug);
+    const { likesNumber, updateLikes } = useLikesUpdate(review?.slug);
     const creation_date = new Date(review.created_at).toLocaleString();
     return (
         <div className="card p-0 border-0 shadow-sm rounded-4 overflow-hidden" data-bs-theme="dark">
