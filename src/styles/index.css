@@ -37,27 +37,27 @@ body {
 *,
 *::before,
 *::after {
-    cursor: url(/icona-dinosauro.png), pointer;
+    cursor: url(/icona-dinosauro.png), pointer !important;
 }
 
 *:active {
-    cursor: url(/icona-dinosauro-pointer.png), auto;
+    cursor: url(/icona-dinosauro-pointer.png), auto !important;
 }
 
 a {
-    cursor: url(/icona-dinosauro-pointer.png), pointer;
+    cursor: url(/icona-dinosauro-pointer.png), pointer !important;
 }
 
 button.btn {
-    cursor: url(/icona-dinosauro-pointer.png), pointer;
+    cursor: url(/icona-dinosauro-pointer.png), pointer !important;
 }
 
 button:not(:disabled) {
-    cursor: url(/icona-dinosauro.png), pointer;
+    cursor: url(/icona-dinosauro.png), pointer !important;
 }
 
 .btn {
-    cursor: url(/icona-dinosauro-pointer.png), pointer;
+    cursor: url(/icona-dinosauro-pointer.png), pointer !important;
 }
 
 h1,
