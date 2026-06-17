@@ -4,7 +4,7 @@ function AgentChatCard({ children, className, role }) {
     return (
         <div className={className}>
             <strong>
-                {role === "user" ? "Tu" : "Claudio"}:
+                {role === "user" ? "Tu" : "Rexy"}:
             </strong>
             <div
             dangerouslySetInnerHTML={{ __html: children }}
